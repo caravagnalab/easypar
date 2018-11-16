@@ -116,13 +116,27 @@ run = function(
     }
   }
   else {
+
+    require(doParallel)
+
     # Run with parallelism is a dopar
     R = foreach(i = 1:N, .packages = packages, .export = export) %dopar%
     {
-      # run, and cache if required
-      r = do.call(FUN, PARAMS[[i]])
-      cacheit(r, cache)
-      r
+      # error catch
+
+      tryCatch({
+
+        # run, and cache if required
+        r = do.call(FUN, PARAMS[[i]])
+        cacheit(r, cache)
+        r
+
+      },
+      error = function(e)
+      {
+        message(e)
+        NULL
+      })
     }
   }
 
