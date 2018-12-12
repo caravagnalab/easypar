@@ -1,2 +1,2 @@
 # easypar
-Easy parallelisation/ serialisation of R functions
+Easy parallelisation of R functions.
