@@ -29,13 +29,15 @@ stopcl = function(cl, silent)
   if(!silent) cat(bgGreen(" OK \n"))
 }
 
-cacheit = function(x, file) {
+cacheit = function(x, file, i) {
   if(!is.null(file))
   {
     obj = NULL
     if(file.exists(file)) obj = readRDS(file)
 
-    obj = append(obj, list(x))
+    new.obj = list(x)
+    names(new.obj) = i
+    obj = append(obj, new.obj)
     saveRDS(obj, file = file)
   }
 }
@@ -94,6 +96,7 @@ run = function(
 
   if(!is.null(cache) & !silent)
   {
+    cache = paste0(getwd(), '/', cache)
     message("[easypar] caching outputs to : ", cache)
   }
 
@@ -105,6 +108,7 @@ run = function(
   N = length(PARAMS)
   R = NULL
 
+
   if(!parallel) {
     # Run without parallelism is a for loop
     for(i in 1:N)
@@ -112,7 +116,7 @@ run = function(
       r = do.call(FUN, PARAMS[[i]])
 
       R = append(R, r)
-      cacheit(r, cache)
+      cacheit(r, cache, i)
     }
   }
   else {
@@ -120,24 +124,41 @@ run = function(
     require(doParallel)
 
     # Run with parallelism is a dopar
-    R = foreach(i = 1:N, .packages = packages, .export = export) %dopar%
+    R = foreach(i = 1:N, .packages = packages, .export = export, .errorhandling = 'pass') %dopar%
     {
       # error catch
+      # tryCatch({
+      #
+      #   # run, and cache if required
+      #   r = do.call(FUN, PARAMS[[i]])
+      #   cacheit(r, cache)
+      #   r
+      #
+      # },
+      # error = function(e)
+      # {
+      #   print("[easypar] Intercepted error")
+      #   message(e)
+      #   return(NULL)
+      # })
 
-      tryCatch({
-
-        # run, and cache if required
-        r = do.call(FUN, PARAMS[[i]])
-        cacheit(r, cache)
-        r
-
-      },
-      error = function(e)
-      {
-        message(e)
-        NULL
-      })
+      # run, and cache if required
+      r = do.call(FUN, PARAMS[[i]])
+      cacheit(r, cache, i)
+      r
     }
+
+    if(!silent)
+    {
+      errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
+      nerrs = sum(errs)
+      perrs = 100 * nerrs/length(R)
+
+      if(nerrs > 0)
+        message("[easypar] task(s) raising errors : ", nerrs, " [", perrs, "%, n =", length(R), "]")
+    }
+
+
   }
 
   ##############
