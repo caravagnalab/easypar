@@ -115,7 +115,7 @@ run = function(
     {
       r = do.call(FUN, PARAMS[[i]])
 
-      R = append(R, r)
+      R = append(R, list(r))
       cacheit(r, cache, i)
     }
   }
@@ -150,8 +150,8 @@ run = function(
 
     if(!silent)
     {
-      errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
-      nerrs = sum(errs)
+
+      nerrs = numErrors(R)
       perrs = 100 * nerrs/length(R)
 
       if(nerrs > 0)
@@ -168,3 +168,37 @@ run = function(
 
   return(R)
 }
+
+#' Return the number of tasks with errors
+#'
+#' @param R The list of outputs from \code{run}
+#'
+#' @return the number of tasks with errors
+#' @export
+#'
+#' @examples
+numErrors = function(R)
+{
+  errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
+  sum(errs)
+}
+
+#' Remove the tasks with errors from the output
+#'
+#' @param R The list of outputs from \code{run}
+#'
+#' @return The list of tasks without errors
+#' @export
+#'
+#' @examples
+filterErrors = function(R)
+{
+  ner = numErrors(R)
+
+  if(ner == length(R)) return(NULL)
+
+  errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
+
+  R[!errs]
+}
+

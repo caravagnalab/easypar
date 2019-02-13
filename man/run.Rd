@@ -5,9 +5,7 @@
 \title{Run a function with easypar}
 \usage{
 run(FUN, PARAMS, packages = NULL, export = NULL, cores.ratio = 0.8,
-  parallel = TRUE, silent = FALSE, outfile = "",
-  cache = paste0(paste0(sample(LETTERS, 8), collapse = ""),
-  "_easypar_computation.RDS"))
+  parallel = TRUE, silent = FALSE, outfile = "", cache = NULL)
 }
 \arguments{
 \item{FUN}{R function to run}
@@ -24,7 +22,7 @@ run(FUN, PARAMS, packages = NULL, export = NULL, cores.ratio = 0.8,
 
 \item{silent}{Silent output from easypar.}
 
-\item{outfile}{Output file for the parallel thread, default \code{""} is console.}
+\item{outfile}{Output file for the parallel thread, default \code{""} is console, \code{NA} is the default.}
 
 \item{cache}{Cache is used during computation to dump results to a template RDS file.}
 }
