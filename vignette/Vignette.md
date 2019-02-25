@@ -69,7 +69,7 @@ f = function(x)
 f(3)
 ```
 
-    ## [1] "Before sleep 3  - siesta for  3.32070964039303"
+    ## [1] "Before sleep 3  - siesta for  2.459970228374"
     ## [1] "After sleep 3"
 
     ## [1] 3
@@ -86,22 +86,22 @@ print(inputs)
 
     ## [[1]]
     ## [[1]][[1]]
-    ## [1] 0.8989073
+    ## [1] 0.3253077
     ## 
     ## 
     ## [[2]]
     ## [[2]][[1]]
-    ## [1] 0.6104488
+    ## [1] 0.5814452
     ## 
     ## 
     ## [[3]]
     ## [[3]][[1]]
-    ## [1] 0.6236117
+    ## [1] 0.2963471
     ## 
     ## 
     ## [[4]]
     ## [[4]][[1]]
-    ## [1] 0.6579422
+    ## [1] 0.4976368
 
 `easypar` provides a single function that takes as input `f`, its list
 of inputs and some execution parameters for the type of execution
@@ -130,18 +130,19 @@ easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NA)
     ##  [easypar] Stopping parallel clusters.
 
     ## [[1]]
-    ## [1] 0.8989073
+    ## [1] 0.3253077
     ## 
     ## [[2]]
-    ## [1] 0.6104488
+    ## [1] 0.5814452
     ## 
     ## [[3]]
-    ## [1] 0.6236117
+    ## [1] 0.2963471
     ## 
     ## [[4]]
-    ## [1] 0.6579422
+    ## [1] 0.4976368
 
-Other combinations are possible.
+We can control the amount (0 to 1) of cores to use at maximum (which are
+checked via `doPar`). Other combinations are also possible.
 
   - make each thread dump to a shared `rds` file its result,
     implementing a cache which is usefull if one want to real-time
@@ -160,16 +161,16 @@ easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NA, cache = "M
     ##  [easypar] Stopping parallel clusters.
 
     ## [[1]]
-    ## [1] 0.8989073
+    ## [1] 0.3253077
     ## 
     ## [[2]]
-    ## [1] 0.6104488
+    ## [1] 0.5814452
     ## 
     ## [[3]]
-    ## [1] 0.6236117
+    ## [1] 0.2963471
     ## 
     ## [[4]]
-    ## [1] 0.6579422
+    ## [1] 0.4976368
 
 ``` r
 # Check
@@ -188,6 +189,30 @@ print(cache)
     ## 
     ## $`4`
     ## [1] 0.6579422
+    ## 
+    ## $`1`
+    ## [1] 0.1840576
+    ## 
+    ## $`2`
+    ## [1] 0.5008038
+    ## 
+    ## $`4`
+    ## [1] 0.4785738
+    ## 
+    ## $`3`
+    ## [1] 0.424577
+    ## 
+    ## $`2`
+    ## [1] 0.5814452
+    ## 
+    ## $`1`
+    ## [1] 0.3253077
+    ## 
+    ## $`3`
+    ## [1] 0.2963471
+    ## 
+    ## $`4`
+    ## [1] 0.4976368
 
   - get outputs to screen (asynchronous per thread) with `outfile`
 
@@ -201,16 +226,16 @@ easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = '')
     ##  [easypar] Stopping parallel clusters.
 
     ## [[1]]
-    ## [1] 0.8989073
+    ## [1] 0.3253077
     ## 
     ## [[2]]
-    ## [1] 0.6104488
+    ## [1] 0.5814452
     ## 
     ## [[3]]
-    ## [1] 0.6236117
+    ## [1] 0.2963471
     ## 
     ## [[4]]
-    ## [1] 0.6579422
+    ## [1] 0.4976368
 
   - sequentially every tasks in a `for`-loop
     fashion
@@ -221,28 +246,28 @@ easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = '')
 easypar::run(FUN = f, PARAMS = inputs, parallel = FALSE, outfile = '')
 ```
 
-    ## [1] "Before sleep 0.898907310329378  - siesta for  3.91350696212612"
-    ## [1] "After sleep 0.898907310329378"
-    ## [1] "Before sleep 0.610448797931895  - siesta for  3.03175570326857"
-    ## [1] "After sleep 0.610448797931895"
-    ## [1] "Before sleep 0.623611651128158  - siesta for  0.660418416373432"
-    ## [1] "After sleep 0.623611651128158"
-    ## [1] "Before sleep 0.657942157005891  - siesta for  4.65605356032029"
-    ## [1] "After sleep 0.657942157005891"
+    ## [1] "Before sleep 0.325307675404474  - siesta for  3.11534057604149"
+    ## [1] "After sleep 0.325307675404474"
+    ## [1] "Before sleep 0.581445153104141  - siesta for  3.4276579588186"
+    ## [1] "After sleep 0.581445153104141"
+    ## [1] "Before sleep 0.296347065363079  - siesta for  1.85461856657639"
+    ## [1] "After sleep 0.296347065363079"
+    ## [1] "Before sleep 0.497636846033856  - siesta for  3.35230449680239"
+    ## [1] "After sleep 0.497636846033856"
 
     ## [[1]]
-    ## [1] 0.8989073
+    ## [1] 0.3253077
     ## 
     ## [[2]]
-    ## [1] 0.6104488
+    ## [1] 0.5814452
     ## 
     ## [[3]]
-    ## [1] 0.6236117
+    ## [1] 0.2963471
     ## 
     ## [[4]]
-    ## [1] 0.6579422
+    ## [1] 0.4976368
 
-## Runtime control of doPar
+## Runtime control of `doPar`
 
 We can disable parallel executions easily.
 
@@ -265,23 +290,81 @@ easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE)
 
     ## [easypar] overriding parallel setup [TRUE] with global option :FALSE
 
-    ## [1] "Before sleep 0.898907310329378  - siesta for  1.55144086224027"
-    ## [1] "After sleep 0.898907310329378"
-    ## [1] "Before sleep 0.610448797931895  - siesta for  3.88964196317829"
-    ## [1] "After sleep 0.610448797931895"
-    ## [1] "Before sleep 0.623611651128158  - siesta for  2.40350348874927"
-    ## [1] "After sleep 0.623611651128158"
-    ## [1] "Before sleep 0.657942157005891  - siesta for  2.91252164053731"
-    ## [1] "After sleep 0.657942157005891"
+    ## [1] "Before sleep 0.325307675404474  - siesta for  0.420352999353781"
+    ## [1] "After sleep 0.325307675404474"
+    ## [1] "Before sleep 0.581445153104141  - siesta for  0.96608798019588"
+    ## [1] "After sleep 0.581445153104141"
+    ## [1] "Before sleep 0.296347065363079  - siesta for  4.89329873467796"
+    ## [1] "After sleep 0.296347065363079"
+    ## [1] "Before sleep 0.497636846033856  - siesta for  3.7195939256344"
+    ## [1] "After sleep 0.497636846033856"
 
     ## [[1]]
-    ## [1] 0.8989073
+    ## [1] 0.3253077
     ## 
     ## [[2]]
-    ## [1] 0.6104488
+    ## [1] 0.5814452
     ## 
     ## [[3]]
-    ## [1] 0.6236117
+    ## [1] 0.2963471
     ## 
     ## [[4]]
-    ## [1] 0.6579422
+    ## [1] 0.4976368
+
+## Errors handling
+
+``` r
+# Hopefully r will crash at least once but not all calls
+f = function(x) 
+{
+  if(runif(1) > .5) stop("Boom!!")
+  
+  "Ok"
+}
+
+# Restore parallel and run
+options(easypar.parallel = TRUE)
+runs = easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NA)
+```
+
+    ##  [easypar] Registering multiple cores:  2 out of 4 [ratio 80%]
+
+    ## [easypar] task(s) raising errors : 1 [25%, n =4]
+
+    ##  [easypar] Stopping parallel clusters.
+
+``` r
+# inspect and filter function
+numErrors(runs)
+```
+
+    ## [1] 1
+
+``` r
+runs
+```
+
+    ## [[1]]
+    ## [1] "Ok"
+    ## 
+    ## [[2]]
+    ## [1] "Ok"
+    ## 
+    ## [[3]]
+    ## <simpleError in (function (x) {    if (runif(1) > 0.5)         stop("Boom!!")    "Ok"})(0.296347065363079): Boom!!>
+    ## 
+    ## [[4]]
+    ## [1] "Ok"
+
+``` r
+filterErrors(runs)
+```
+
+    ## [[1]]
+    ## [1] "Ok"
+    ## 
+    ## [[2]]
+    ## [1] "Ok"
+    ## 
+    ## [[3]]
+    ## [1] "Ok"

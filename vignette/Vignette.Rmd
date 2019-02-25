@@ -69,8 +69,7 @@ print(inputs)
 library(easypar)
 easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NA)
 ```
-
-Other combinations are possible.
+We can control the amount (0 to 1) of cores to use at maximum (which are checked via `doPar`). Other combinations are also possible.
 
 * make each thread dump to a shared `rds` file its result, implementing a cache which is usefull if one want to real-time analyze output results (with another process).
 ```{r, eval=TRUE}
@@ -109,8 +108,25 @@ easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE)
 
 ## Errors handling
 
+```{r}
+# Hopefully r will crash at least once but not all calls
+f = function(x) 
+{
+  if(runif(1) > .5) stop("Boom!!")
+  
+  "Ok"
+}
 
-Sequ
+# Restore parallel and run
+options(easypar.parallel = TRUE)
+runs = easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NA)
+
+# inspect and filter function
+numErrors(runs)
+runs
+
+filterErrors(runs)
+```
 
 
 

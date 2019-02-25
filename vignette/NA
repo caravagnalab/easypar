@@ -1,56 +1,68 @@
-starting worker pid=64216 on localhost:11447 at 00:13:54.227
-starting worker pid=64224 on localhost:11447 at 00:13:54.493
+starting worker pid=64624 on localhost:11185 at 00:41:59.225
+starting worker pid=64632 on localhost:11185 at 00:41:59.454
 Loading required package: easypar
 Loading required package: easypar
 loaded easypar and set parent environment
 loaded easypar and set parent environment
-[1] "Before sleep 0.858872660901397  - siesta for  0.114658828824759"
-[1] "Before sleep 0.160695284139365  - siesta for  2.993279871298"
-[1] "After sleep 0.858872660901397"
-[1] "Before sleep 0.663165915058926  - siesta for  3.92282267916016"
-[1] "After sleep 0.160695284139365"
-[1] "Before sleep 0.120633176295087  - siesta for  0.323753129923716"
-[1] "After sleep 0.120633176295087"
-[1] "After sleep 0.663165915058926"
-starting worker pid=64286 on localhost:11440 at 00:16:53.048
-starting worker pid=64294 on localhost:11440 at 00:16:53.313
+starting worker pid=64664 on localhost:11894 at 00:45:49.825
+starting worker pid=64672 on localhost:11894 at 00:45:50.033
 Loading required package: easypar
 Loading required package: easypar
 loaded easypar and set parent environment
 loaded easypar and set parent environment
-[1] "Before sleep 0.156578836264089  - siesta for  2.55378705216572"
-[1] "Before sleep 0.820570207200944  - siesta for  2.83625905751251"
-[1] "After sleep 0.156578836264089"
-[1] "Before sleep 0.14945246418938  - siesta for  4.219029545784"
-[1] "After sleep 0.820570207200944"
-[1] "Before sleep 0.347727367188781  - siesta for  0.906829697778448"
-[1] "After sleep 0.347727367188781"
-[1] "After sleep 0.14945246418938"
-starting worker pid=64440 on localhost:11774 at 00:29:57.642
-starting worker pid=64448 on localhost:11774 at 00:29:57.845
+[1] "Before sleep 0.500803756061941  - siesta for  2.94049129472114"
+[1] "Before sleep 0.184057565173134  - siesta for  0.827417337568477"
+[1] "After sleep 0.184057565173134"
+[1] "Before sleep 0.424576956545934  - siesta for  4.42035419051535"
+[1] "After sleep 0.500803756061941"
+[1] "Before sleep 0.478573786094785  - siesta for  4.88304217928089"
+[1] "After sleep 0.424576956545934"
+[1] "After sleep 0.478573786094785"
+starting worker pid=64684 on localhost:11894 at 00:45:58.369
+starting worker pid=64693 on localhost:11894 at 00:45:58.568
 Loading required package: easypar
 Loading required package: easypar
 loaded easypar and set parent environment
 loaded easypar and set parent environment
-[1] "Before sleep 0.898907310329378  - siesta for  1.72397474525496"
-[1] "Before sleep 0.610448797931895  - siesta for  4.49969688314013"
-[1] "After sleep 0.898907310329378"
-[1] "Before sleep 0.623611651128158  - siesta for  3.61665314179845"
-[1] "After sleep 0.610448797931895"
-[1] "Before sleep 0.657942157005891  - siesta for  2.39479342126288"
-[1] "After sleep 0.623611651128158"
-[1] "After sleep 0.657942157005891"
-starting worker pid=64460 on localhost:11774 at 00:30:05.219
-starting worker pid=64469 on localhost:11774 at 00:30:05.419
+[1] "Before sleep 0.184057565173134  - siesta for  1.46481350297108"
+[1] "Before sleep 0.500803756061941  - siesta for  2.9836850578431"
+[1] "After sleep 0.184057565173134"
+[1] "Before sleep 0.424576956545934  - siesta for  3.04945899057202"
+[1] "After sleep 0.500803756061941"
+[1] "Before sleep 0.478573786094785  - siesta for  0.258444278733805"
+[1] "After sleep 0.478573786094785"
+[1] "After sleep 0.424576956545934"
+starting worker pid=64743 on localhost:11338 at 00:48:34.989
+starting worker pid=64751 on localhost:11338 at 00:48:35.216
 Loading required package: easypar
 Loading required package: easypar
 loaded easypar and set parent environment
 loaded easypar and set parent environment
-[1] "Before sleep 0.898907310329378  - siesta for  3.6722400423605"
-[1] "Before sleep 0.610448797931895  - siesta for  0.995781922247261"
-[1] "After sleep 0.610448797931895"
-[1] "Before sleep 0.623611651128158  - siesta for  1.29926323192194"
-[1] "After sleep 0.623611651128158"
-[1] "Before sleep 0.657942157005891  - siesta for  2.48743649804965"
-[1] "After sleep 0.898907310329378"
-[1] "After sleep 0.657942157005891"
+[1] "Before sleep 0.325307675404474  - siesta for  2.41024132934399"
+[1] "Before sleep 0.581445153104141  - siesta for  1.0106239921879"
+[1] "After sleep 0.581445153104141"
+[1] "Before sleep 0.296347065363079  - siesta for  1.22133096214384"
+[1] "After sleep 0.296347065363079"
+[1] "Before sleep 0.497636846033856  - siesta for  0.579020903678611"
+[1] "After sleep 0.325307675404474"
+[1] "After sleep 0.497636846033856"
+starting worker pid=64763 on localhost:11338 at 00:48:38.605
+starting worker pid=64772 on localhost:11338 at 00:48:38.819
+Loading required package: easypar
+Loading required package: easypar
+loaded easypar and set parent environment
+loaded easypar and set parent environment
+[1] "Before sleep 0.325307675404474  - siesta for  4.3763203243725"
+[1] "Before sleep 0.581445153104141  - siesta for  2.90761111886241"
+[1] "After sleep 0.581445153104141"
+[1] "Before sleep 0.296347065363079  - siesta for  1.8653838802129"
+[1] "After sleep 0.325307675404474"
+[1] "Before sleep 0.497636846033856  - siesta for  1.39266225858591"
+[1] "After sleep 0.296347065363079"
+[1] "After sleep 0.497636846033856"
+starting worker pid=64827 on localhost:11338 at 00:49:13.294
+starting worker pid=64835 on localhost:11338 at 00:49:13.559
+Loading required package: easypar
+Loading required package: easypar
+loaded easypar and set parent environment
+loaded easypar and set parent environment
