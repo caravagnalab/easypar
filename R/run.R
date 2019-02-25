@@ -8,25 +8,27 @@ setupcl = function(cores.ratio, silent = FALSE, outfile = "")
 
   if(!silent)
     pio::pioStr(
-      paste0('Registering to use multicores ... '),
-      paste0(cores,' / ', ncores, ' [ratio ', cores.ratio, ']')
+      paste0('[easypar] Registering multiple cores: '),
+      paste0(cores,' out of ', ncores, ' [ratio ', cores.ratio * 100, '%]'),
+      suffix = '\n'
     )
 
   cl = makeCluster(cores, outfile = outfile)
   registerDoParallel(cl)
 
-  if(!silent) cat(bgGreen(" OK \n"))
+  # if(!silent) cat(bgGreen(" OK \n"))
 
   return(cl)
 }
 
 stopcl = function(cl, silent)
 {
-  if(!silent) pio::pioStr("Stopping parallel clusters ... ", '')
+  if(!silent)
+    pio::pioStr("[easypar] Stopping parallel clusters. ", '', suffix = '\n')
 
   parallel::stopCluster(cl)
 
-  if(!silent) cat(bgGreen(" OK \n"))
+  # if(!silent) cat(bgGreen(" OK \n"))
 }
 
 cacheit = function(x, file, i) {
