@@ -60,7 +60,7 @@
 #'     if(runif(1) > .5) stop("Some error")
 #'     x
 #'   },
-#'   PARAMS = params,
+#'   PARAMS = dummy_params,
 #'   silent = TRUE
 #' )
 #'
@@ -128,7 +128,7 @@ run = function(FUN,
 
   if (!silent)
   {
-    message("[easypar] ", Sys.time(), " - Computing ", N, ' tasks.')
+    message("[easypar] ", Sys.time(), " - Computing ", length(PARAMS), ' tasks.')
 
     if (!is.null(cache))
     {

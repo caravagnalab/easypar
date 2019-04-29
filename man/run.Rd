@@ -74,7 +74,7 @@ results = run(
     if(runif(1) > .5) stop("Some error")
     x
   },
-  PARAMS = params,
+  PARAMS = dummy_params,
   silent = TRUE
 )
 
