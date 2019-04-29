@@ -16,5 +16,22 @@ The number of tasks with errors
 Return the number of tasks with errors
 }
 \examples{
-TODO
+# Errors can be intercepted. Consider a function
+# that can generate some error. The run will not plot and
+# the computation will run anyway.
+
+options(easypar.parallel = FALSE)
+
+results = run(
+  FUN = function(x) {
+    if(runif(1) > .5) stop("Some error")
+    x
+  },
+  PARAMS = params,
+  silent = TRUE
+)
+
+# Getters that can return the number of errors
+
+numErrors(results)
 }

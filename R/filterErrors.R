@@ -6,7 +6,24 @@
 #' @export filterErrors
 #'
 #' @examples
-#' TODO
+#' # Errors can be intercepted. Consider a function
+#' # that can generate some error. The run will not plot and
+#' # the computation will run anyway.
+#'
+#' options(easypar.parallel = FALSE)
+#'
+#' results = run(
+#'   FUN = function(x) {
+#'     if(runif(1) > .5) stop("Some error")
+#'     x
+#'   },
+#'   PARAMS = params,
+#'   silent = TRUE
+#' )
+#'
+#' # Getter that can filter them out
+#'
+#' filterErrors(results)
 filterErrors = function(R)
 {
   ner = numErrors(R)

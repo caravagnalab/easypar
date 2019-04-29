@@ -5,7 +5,7 @@
 \title{Run a function with easypar}
 \usage{
 run(FUN, PARAMS, packages = NULL, export = NULL, cores.ratio = 0.8,
-  parallel = TRUE, silent = FALSE, outfile = "", cache = NULL,
+  parallel = TRUE, silent = TRUE, outfile = "", cache = NULL,
   progress_bar = TRUE)
 }
 \arguments{
@@ -35,4 +35,52 @@ Run a task on a list of inputs, making easy to parallelize it or run it in
 a sequential session. If the glonal option \code{easypar.parallel} is set, the parameter
 \code{parallel} is overwritten. This allows to easily switch between debug and non-debug
 execution modes for this task.
+}
+\examples{
+
+# A very simple function
+dummy_fun = function(x) {x}
+
+# Parameters
+dummy_params = lapply(1:5, list)
+
+# Default run: parallel, silent, output to screen
+run(dummy_fun, dummy_params)
+
+# Run serially with progress_bar
+run(dummy_fun, dummy_params, parallel = FALSE)
+# Run serially without progress_bar
+run(dummy_fun, dummy_params, parallel = FALSE, progress_bar = FALSE)
+
+# Run parallel, not silent, caching the results
+run(dummy_fun, dummy_params, silent = FALSE, cache = "MyCache.rds")
+file.remove("MyCache.rds")
+
+# Overwriting default setting with global options
+options(easypar.parallel = FALSE)
+run(dummy_fun, dummy_params) # Will run sequentially
+
+options(easypar.progress_bar = FALSE) # Will hide the progress bar
+run(dummy_fun, dummy_params)
+
+# Errors can be intercepted. Consider a function
+# that can generate some error. The run will not plot and
+# the computation will run anyway.
+
+options(easypar.parallel = FALSE)
+
+results = run(
+  FUN = function(x) {
+    if(runif(1) > .5) stop("Some error")
+    x
+  },
+  PARAMS = params,
+  silent = TRUE
+)
+
+# Getters that can return the number of errors
+# and filter them out
+
+numErrors(results)
+filterErrors(results)
 }

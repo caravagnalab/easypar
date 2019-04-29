@@ -17,15 +17,58 @@
 #'
 #' @return
 #'
-#' @import parallel
 #' @import doParallel
-#' @import crayon
-#' @import pio
 #'
 #' @export run
 #'
 #' @examples
-#' TODO
+#'
+#' # A very simple function
+#' dummy_fun = function(x) {x}
+#'
+#' # Parameters
+#' dummy_params = lapply(1:5, list)
+#'
+#' # Default run: parallel, silent, output to screen
+#' run(dummy_fun, dummy_params)
+#'
+#' # Run serially with progress_bar
+#' run(dummy_fun, dummy_params, parallel = FALSE)
+#
+#' # Run serially without progress_bar
+#' run(dummy_fun, dummy_params, parallel = FALSE, progress_bar = FALSE)
+#'
+#' # Run parallel, not silent, caching the results
+#' run(dummy_fun, dummy_params, silent = FALSE, cache = "MyCache.rds")
+#' file.remove("MyCache.rds")
+#'
+#' # Overwriting default setting with global options
+#' options(easypar.parallel = FALSE)
+#' run(dummy_fun, dummy_params) # Will run sequentially
+#'
+#' options(easypar.progress_bar = FALSE) # Will hide the progress bar
+#' run(dummy_fun, dummy_params)
+#'
+#' # Errors can be intercepted. Consider a function
+#' # that can generate some error. The run will not plot and
+#' # the computation will run anyway.
+#'
+#' options(easypar.parallel = FALSE)
+#'
+#' results = run(
+#'   FUN = function(x) {
+#'     if(runif(1) > .5) stop("Some error")
+#'     x
+#'   },
+#'   PARAMS = params,
+#'   silent = TRUE
+#' )
+#'
+#' # Getters that can return the number of errors
+#' # and filter them out
+#'
+#' numErrors(results)
+#' filterErrors(results)
 run = function(FUN,
                PARAMS,
                packages = NULL,
@@ -85,7 +128,6 @@ run = function(FUN,
 
   if (!silent)
   {
-
     message("[easypar] ", Sys.time(), " - Computing ", N, ' tasks.')
 
     if (!is.null(cache))
