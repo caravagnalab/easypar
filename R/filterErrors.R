@@ -1,0 +1,19 @@
+#' Filter out the tasks with errors.
+#'
+#' @param R The list of outputs from \code{run}
+#'
+#' @return The list of tasks without errors
+#' @export filterErrors
+#'
+#' @examples
+#' TODO
+filterErrors = function(R)
+{
+  ner = numErrors(R)
+
+  if(ner == length(R)) return(NULL)
+
+  errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
+
+  R[!errs]
+}

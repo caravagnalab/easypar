@@ -5,7 +5,8 @@
 \title{Run a function with easypar}
 \usage{
 run(FUN, PARAMS, packages = NULL, export = NULL, cores.ratio = 0.8,
-  parallel = TRUE, silent = FALSE, outfile = "", cache = NULL)
+  parallel = TRUE, silent = FALSE, outfile = "", cache = NULL,
+  progress_bar = TRUE)
 }
 \arguments{
 \item{FUN}{R function to run}

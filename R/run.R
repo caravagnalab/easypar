@@ -1,49 +1,3 @@
-setupcl = function(cores.ratio, silent = FALSE, outfile = "")
-{
-  ncores = detectCores()
-
-  # set the number of cores to be used in the parallelization
-  cores = as.integer(cores.ratio * (ncores - 1))
-  if (cores < 1) cores = 1
-
-  if(!silent)
-    pio::pioStr(
-      paste0('[easypar] Registering multiple cores: '),
-      paste0(cores,' out of ', ncores, ' [ratio ', cores.ratio * 100, '%]'),
-      suffix = '\n'
-    )
-
-  cl = makeCluster(cores, outfile = outfile)
-  registerDoParallel(cl)
-
-  # if(!silent) cat(bgGreen(" OK \n"))
-
-  return(cl)
-}
-
-stopcl = function(cl, silent)
-{
-  if(!silent)
-    pio::pioStr("[easypar] Stopping parallel clusters. ", '', suffix = '\n')
-
-  parallel::stopCluster(cl)
-
-  # if(!silent) cat(bgGreen(" OK \n"))
-}
-
-cacheit = function(x, file, i) {
-  if(!is.null(file))
-  {
-    obj = NULL
-    if(file.exists(file)) obj = readRDS(file)
-
-    new.obj = list(x)
-    names(new.obj) = i
-    obj = append(obj, new.obj)
-    saveRDS(obj, file = file)
-  }
-}
-
 #' Run a function with easypar
 #'
 #' @description Run a task on a list of inputs, making easy to parallelize it or run it in
@@ -68,139 +22,182 @@ cacheit = function(x, file, i) {
 #' @import crayon
 #' @import pio
 #'
-#' @export
+#' @export run
 #'
 #' @examples
-run = function(
-  FUN,
-  PARAMS,
-  packages = NULL,
-  export = NULL,
-  cores.ratio = 0.8,
-  parallel = TRUE,
-  silent = FALSE,
-  outfile = "",
-  cache = NULL
-)
+#' TODO
+run = function(FUN,
+               PARAMS,
+               packages = NULL,
+               export = NULL,
+               cores.ratio = 0.8,
+               parallel = TRUE,
+               silent = TRUE,
+               outfile = "",
+               cache = NULL,
+               progress_bar = TRUE)
 {
+  # =-=-=-=-=-=-=-=-=-=-=-
+  # Stop on error if input is not correct
+  # =-=-=-=-=-=-=-=-=-=-=-
   stopifnot(is.function(FUN))
   stopifnot(is.list(PARAMS))
 
-  # Global parallel option can disable at once all the parallel calls
-  opt_parallel = getOption("easypar.parallel", default = NA)
+  # =-=-=-=-=-=-=-=-=-=-=-
+  # Global options can disable local parameters
+  #
+  # We first load global values, and then we check them one by one
+  # against the required parameters. Options are used only if need be,
+  # which is when the option does not match the call
+  # =-=-=-=-=-=-=-=-=-=-=-
 
-  # Used only if need be, which is when the global option does not match the call requirements
-  if(!is.na(opt_parallel) & parallel != opt_parallel)
+  override = function(opt, x, what)
   {
-    message("[easypar] overriding parallel setup [", parallel, "] with global option :", opt_parallel)
-    parallel = opt_parallel
+    # Global option
+    opt = getOption(opt, default = NULL)
+
+    # If it is defined, and is not as `x`, override
+    if (!is.null(opt))
+    {
+      message(
+        "[easypar] ", Sys.time(), " - Overriding ", what, " setup [",
+        x,
+        "] with global option : ",
+        opt
+      )
+
+      return(opt)
+    }
+
+    x
   }
 
-  if(!is.null(cache) & !silent)
+  # Get all options to run
+  parallel = override("easypar.parallel", parallel, "parallel execution")
+  cache = override("easypar.cache", cache, "partial caching")
+  silent = override("easypar.silent", silent, "silent")
+  outfile = override("easypar.outfile", outfile, "output redirection")
+  progress_bar = override("easypar.progress_bar", progress_bar, "progress bar")
+
+  # =-=-=-=-=-=-=-=-=-=-=-
+  # Preamble of the computation
+  # =-=-=-=-=-=-=-=-=-=-=-
+
+  if (!silent)
   {
-    cache = paste0(getwd(), '/', cache)
-    message("[easypar] caching outputs to : ", cache)
+
+    message("[easypar] ", Sys.time(), " - Computing ", N, ' tasks.')
+
+    if (!is.null(cache))
+    {
+      cache = paste0(getwd(), '/', cache)
+      message("[easypar] ", Sys.time(), " - Caching outputs to : ", cache)
+
+      if (file.exists(cache))
+        message("[easypar] ", Sys.time(), " - Cache file exists, outputs will be appended.")
+    }
   }
 
   # Generate cluster handle
   cluster_handle = NULL
-  if(parallel) cluster_handle = setupcl(cores.ratio = cores.ratio, silent = silent, outfile = outfile)
+  if (parallel)
+    cluster_handle = setupcl(cores.ratio = cores.ratio,
+                             silent = silent,
+                             outfile = outfile)
 
-  ############## actual computation
+  # Number of parameters and output list
   N = length(PARAMS)
   R = NULL
 
+  # =-=-=-=-=-=-=-=-=-=-=-
+  # Actual computation
+  #
+  # Run without parallelism is a for loop
+  # =-=-=-=-=-=-=-=-=-=-=-
 
-  if(!parallel) {
-    # Run without parallelism is a for loop
-    for(i in 1:N)
+  if (!parallel)
+  {
+    if (!silent) message("[easypar] ", Sys.time(), " - Running sequentially.")
+
+    # With a progressbar
+    pb = NULL
+    if (progress_bar)
+      pb = txtProgressBar(min = 1,
+                          max = N,
+                          style = 3)
+
+    for (i in 1:N)
     {
-      r = do.call(FUN, PARAMS[[i]])
+      if (progress_bar)
+        setTxtProgressBar(pb, i)
 
-      R = append(R, list(r))
-      cacheit(r, cache, i)
+      # Call the function, within an error handler
+      tryCatch({
+        r = do.call(FUN, PARAMS[[i]])
+
+        # cache if required
+        cacheit(r, cache, i)
+
+        R = append(R, list(r))
+      },
+      error = function(e)
+      {
+        # Intercepted error
+        message(e)
+        return(e)
+      })
+
     }
   }
-  else {
 
-    require(doParallel)
+  # =-=-=-=-=-=-=-=-=-=-=-
+  # Actual computation
+  #
+  # Run with parallelism
+  # =-=-=-=-=-=-=-=-=-=-=-
+
+  if (parallel)
+  {
+    if (!silent) message("[easypar] ", Sys.time(), " - Runnig parallel.")
+
+    suppressMessages(require(doParallel))
 
     # Run with parallelism is a dopar
-    R = foreach(i = 1:N, .packages = packages, .export = export, .errorhandling = 'pass') %dopar%
+    R = foreach(
+      i = 1:N,
+      .packages = packages,
+      .export = export,
+      .errorhandling = 'pass'
+    ) %dopar%
+      {
+        # run, and cache if required
+        r = do.call(FUN, PARAMS[[i]])
+
+        cacheit(r, cache, i)
+        r
+      }
+
+    if (!silent)
     {
-      # error catch
-      # tryCatch({
-      #
-      #   # run, and cache if required
-      #   r = do.call(FUN, PARAMS[[i]])
-      #   cacheit(r, cache)
-      #   r
-      #
-      # },
-      # error = function(e)
-      # {
-      #   print("[easypar] Intercepted error")
-      #   message(e)
-      #   return(NULL)
-      # })
-
-      # run, and cache if required
-      r = do.call(FUN, PARAMS[[i]])
-      cacheit(r, cache, i)
-      r
-    }
-
-    if(!silent)
-    {
-
       nerrs = numErrors(R)
-      perrs = 100 * nerrs/length(R)
+      perrs = 100 * nerrs / length(R)
 
-      if(nerrs > 0)
-        message("[easypar] task(s) raising errors : ", nerrs, " [", perrs, "%, n =", length(R), "]")
+      if (nerrs > 0)
+        message("[easypar] ", Sys.time(), " - Task(s) raising errors : ",
+                nerrs,
+                " [",
+                perrs,
+                "%, n =",
+                length(R),
+                "]")
     }
 
 
   }
 
-  ##############
-
   # Release cluster handle
-  if(parallel) stopcl(cluster_handle, silent)
+  if (parallel)
+    stopcl(cluster_handle, silent)
 
   return(R)
 }
-
-#' Return the number of tasks with errors
-#'
-#' @param R The list of outputs from \code{run}
-#'
-#' @return the number of tasks with errors
-#' @export
-#'
-#' @examples
-numErrors = function(R)
-{
-  errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
-  sum(errs)
-}
-
-#' Remove the tasks with errors from the output
-#'
-#' @param R The list of outputs from \code{run}
-#'
-#' @return The list of tasks without errors
-#' @export
-#'
-#' @examples
-filterErrors = function(R)
-{
-  ner = numErrors(R)
-
-  if(ner == length(R)) return(NULL)
-
-  errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
-
-  R[!errs]
-}
-
