@@ -67,7 +67,7 @@ run(dummy_fun, dummy_params)
 # that can generate some error. The run will not plot and
 # the computation will run anyway.
 
-options(easypar.parallel = FALSE)
+options(easypar.parallel = TRUE)
 
 results = run(
   FUN = function(x) {
@@ -82,5 +82,6 @@ results = run(
 # and filter them out
 
 numErrors(results)
+
 filterErrors(results)
 }

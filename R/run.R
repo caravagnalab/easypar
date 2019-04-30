@@ -18,6 +18,8 @@
 #' @return
 #'
 #' @import doParallel
+#' @import parallel
+#'
 #'
 #' @export run
 #'
@@ -53,7 +55,7 @@
 #' # that can generate some error. The run will not plot and
 #' # the computation will run anyway.
 #'
-#' options(easypar.parallel = FALSE)
+#' options(easypar.parallel = TRUE)
 #'
 #' results = run(
 #'   FUN = function(x) {
@@ -68,6 +70,7 @@
 #' # and filter them out
 #'
 #' numErrors(results)
+#'
 #' filterErrors(results)
 run = function(FUN,
                PARAMS,

@@ -20,7 +20,6 @@ Filter out the tasks with errors.
 # that can generate some error. The run will not plot and
 # the computation will run anyway.
 
-options(easypar.parallel = FALSE)
 
 results = run(
   FUN = function(x) {

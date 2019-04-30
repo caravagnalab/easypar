@@ -126,7 +126,6 @@
 <span class='co'># that can generate some error. The run will not plot and</span>
 <span class='co'># the computation will run anyway.</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='kw'>easypar.parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='no'>results</span> <span class='kw'>=</span> <span class='fu'><a href='run.html'>run</a></span>(
   <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) {
@@ -135,10 +134,15 @@
   },
   <span class='kw'>PARAMS</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>lapply</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='no'>list</span>),
   <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-04-29 15:59:04 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%</div><div class='output co'>#&gt; <span class='error'>Error in (function (x) {    if (runif(1) &gt; 0.5)         stop("Some error")    x})(2L): Some error</span></div><div class='input'>
+)</div><div class='output co'>#&gt; <span class='warning'>Warning: package ‘doParallel’ was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package ‘iterators’ was built under R version 3.4.4</span></div><div class='input'>
 <span class='co'># Getter that can filter them out</span>
 
-<span class='fu'>filterErrors</span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; <span class='error'>Error in lapply(X = X, FUN = FUN, ...): object 'results' not found</span></div></pre>
+<span class='fu'>filterErrors</span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] 3
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] 4
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
