@@ -14,6 +14,7 @@
 #' @param silent Silent output from easypar.
 #' @param outfile Output file for the parallel thread, default \code{""} is console, \code{NA} is the default.
 #' @param cache Cache is used during computation to dump results to a template RDS file.
+#' @param progress_bar Boolean value, default TRUE. Print a progress_bar during the execution.
 #'
 #' @return
 #'

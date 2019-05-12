@@ -26,6 +26,8 @@ run(FUN, PARAMS, packages = NULL, export = NULL, cores.ratio = 0.8,
 \item{outfile}{Output file for the parallel thread, default \code{""} is console, \code{NA} is the default.}
 
 \item{cache}{Cache is used during computation to dump results to a template RDS file.}
+
+\item{progress_bar}{Boolean value, default TRUE. Print a progress_bar during the execution.}
 }
 \value{
 
