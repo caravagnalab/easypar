@@ -4,7 +4,11 @@ author: "Giulio Caravagna"
 date: "15 November 2018"
 institute: "Institute for Cancer Research"
 email: "giulio.caravagna@icr.ac.uk"
-output: rmarkdown::github_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Vignette for easypar}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 The `easypar` R package allows you to:
