@@ -94,7 +94,7 @@ easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = '')
 easypar::run(FUN = f, PARAMS = inputs, parallel = FALSE, outfile = '')
 ```
 
-## Runtime control of `doPar`
+## Runtime control of `easypar`
 
 We can disable parallel executions easily.
 
@@ -123,7 +123,7 @@ f = function(x)
 
 # Restore parallel and run
 options(easypar.parallel = TRUE)
-runs = easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NA)
+runs = easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NULL)
 
 # inspect and filter function
 numErrors(runs)
