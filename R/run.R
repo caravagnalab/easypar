@@ -206,7 +206,7 @@ run = function(FUN,
   {
     if (!silent) message("[easypar] ", Sys.time(), " - Runnig parallel.")
 
-    suppressMessages(require(doParallel))
+    # suppressMessages(require(doParallel))
 
     # Run with parallelism is a dopar
     R = foreach(
