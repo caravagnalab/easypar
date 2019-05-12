@@ -6,7 +6,7 @@ This package provides a simple interface to implement a parallel computation in 
 
 Use either `devtools` or `remotes`
 ```R
-devtools::install_github(repo = "caravagn/reasypar")
+devtools::install_github(repo = "caravagn/easypar")
 ```
 The only dependences are packages for parallel computations in R (`doParallel`, `parallel`, etc.).
 
