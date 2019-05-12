@@ -19,6 +19,7 @@
 #'
 #' @import doParallel
 #' @import parallel
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #'
 #'
 #' @export run
