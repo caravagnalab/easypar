@@ -20,6 +20,7 @@
 #'
 #' @import doParallel
 #' @import parallel
+#' @import foreach
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #'
 #'
