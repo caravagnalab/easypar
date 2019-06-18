@@ -187,12 +187,13 @@ run = function(FUN,
         cacheit(r, cache, i)
 
         R = append(R, list(r))
+        names(R)[length(R)] = i 
       },
       error = function(e)
       {
         # Intercepted error
-        message(e)
-        return(e)
+        message('[easypar] run ', i, ' - ',  e)
+        # return(e)
       })
 
     }
@@ -224,6 +225,8 @@ run = function(FUN,
         cacheit(r, cache, i)
         r
       }
+    
+    names(R) = 1:N
 
     if (!silent)
     {
@@ -231,6 +234,7 @@ run = function(FUN,
       perrs = 100 * nerrs / length(R)
 
       if (nerrs > 0)
+      {
         message("[easypar] ", Sys.time(), " - Task(s) raising errors : ",
                 nerrs,
                 " [",
@@ -238,6 +242,17 @@ run = function(FUN,
                 "%, n =",
                 length(R),
                 "]")
+        
+        # Printing errors
+        errs = sapply(seq(R), 
+                      function(w) 
+                        if(inherits(R[[w]], 'simpleError') | inherits(R[[w]], 'try-error')) {
+                          message('[easypar] run ', w, ' - ',  R[[w]])
+                        }
+        )
+        
+        
+      }
     }
 
 
