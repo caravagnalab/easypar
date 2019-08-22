@@ -146,16 +146,17 @@ run = function(FUN,
     }
   }
 
-  # Generate cluster handle
-  cluster_handle = NULL
-  if (parallel)
-    cluster_handle = setupcl(cores.ratio = cores.ratio,
-                             silent = silent,
-                             outfile = outfile)
-
   # Number of parameters and output list
   N = length(PARAMS)
   R = NULL
+  
+  # Generate cluster handle
+  cluster_handle = NULL
+  if (parallel)
+    cluster_handle = setupcl(N = N,
+                             cores.ratio = cores.ratio,
+                             silent = silent,
+                             outfile = outfile)
 
   # =-=-=-=-=-=-=-=-=-=-=-
   # Actual computation

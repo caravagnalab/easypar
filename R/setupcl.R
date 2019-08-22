@@ -1,4 +1,5 @@
-setupcl = function(cores.ratio,
+setupcl = function(ntasks,
+                   cores.ratio,
                    silent = FALSE,
                    outfile = "")
 {
@@ -8,6 +9,9 @@ setupcl = function(cores.ratio,
   cores = as.integer(cores.ratio * (ncores - 1))
   if (cores < 1)
     cores = 1
+  
+  # do not set more cores than tasks -- no need
+  if(cores > ntasks) cores = ntasks
 
   if (!silent)
     message(
