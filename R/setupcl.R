@@ -1,4 +1,4 @@
-setupcl = function(ntasks,
+setupcl = function(N,
                    cores.ratio,
                    silent = FALSE,
                    outfile = "")
@@ -11,7 +11,7 @@ setupcl = function(ntasks,
     cores = 1
   
   # do not set more cores than tasks -- no need
-  if(cores > ntasks) cores = ntasks
+  if(cores > N) cores = N
 
   if (!silent)
     message(
