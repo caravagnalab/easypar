@@ -4,7 +4,10 @@ author: "Giulio Caravagna"
 date: "15 November 2018"
 institute: "Institute for Cancer Research"
 email: "giulio.caravagna@icr.ac.uk"
-output: rmarkdown::html_vignette
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
 vignette: >
   %\VignetteEngine{knitr::knitr}
   %\VignetteIndexEntry{Vignette for easypar}

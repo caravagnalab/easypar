@@ -171,7 +171,7 @@ run = function(FUN,
     # With a progressbar
     pb = NULL
     if (progress_bar)
-      pb = txtProgressBar(min = 1,
+      pb = txtProgressBar(min = 0,
                           max = N,
                           style = 3)
 
