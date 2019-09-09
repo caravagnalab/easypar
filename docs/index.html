@@ -72,33 +72,37 @@
 <div id="easypar" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#easypar" class="anchor"></a>easypar</h1></div>
-<p>This package provides a simple interface to implement a parallel computation in R, exploiting standard packages for parallelism. For a function to be parallelized it is possible to pass it to <code>easypar</code> and abstract away the complexity of writing it in either parallel and non-parallel form (<code>for</code>-loops); in this way with a single piece of code the function can be run in parallel or not, which sometimes helps debugging etc. At runtime, the parallel setup can be controlled as explained in the vignette.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>Use either <code>devtools</code> or <code>remotes</code></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"caravagn/easypar"</span>)</a></code></pre></div>
-<p>The only dependences are packages for parallel computations in R (<code>doParallel</code>, <code>parallel</code>, etc.).</p>
+<!-- badges: start -->
+
+<p>This package provides a simple interface to implement a parallel computation in R, exploiting standard packages for parallelism like <code>foreach</code> and <code>doParallel</code>.</p>
+<p>For a function to be parallelized it is possible to pass it to <code>easypar</code> and abstract away the complexity of writing it in either parallel and non-parallel form (<code>for</code>-loops); in this way with a single piece of code the function can be run in parallel or not, which sometimes helps debugging etc.</p>
+<p>At runtime, the parallel setup can be controlled as explained in the vignette - see <code><a href="reference/run.html">?run</a></code>.</p>
+<div id="help-and-support" class="section level4">
+<h4 class="hasAnchor">
+<a href="#help-and-support" class="anchor"></a>Help and support</h4>
+<p><code>easypar</code> has its own webpage at <a href="https://caravagn.github.io/easypar/">GitHub pages</a>.</p>
+<hr>
 </div>
-<div id="support" class="section level2">
-<h2 class="hasAnchor">
-<a href="#support" class="anchor"></a>Support</h2>
-<p>Please use GitHub issues systems, or get in touch with me.</p>
-<p>Author: Giulio Caravagna (<a href="mailto:gcaravagn@gmail.com" class="email">gcaravagn@gmail.com</a>)</p>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"caravagn/easypar"</span>)</a></code></pre></div>
+<hr>
+<div id="copyright-and-contacts" class="section level4">
+<h4 class="hasAnchor">
+<a href="#copyright-and-contacts" class="anchor"></a>Copyright and contacts</h4>
+<p>Giulio Caravagna, PhD. <em>Institute of Cancer Research, London, UK</em>.</p>
+<ul>
+<li>Personal webpage: <a href="https://sites.google.com/site/giuliocaravagna/">https://bit.ly/2kc9E6Y</a>,</li>
+<li>Email address: <a href="mailto:giulio.caravagna@icr.ac.uk">giulio.caravagna@icr.ac.uk</a> and <a href="mailto:gcaravagn@gmail.com">gcaravagn@gmail.com</a>
+</li>
+<li>Twitter feed: <a href="https://twitter.com/gcaravagna">@gcaravagna</a>
+</li>
+<li>GitHub space: <a href="https://github.com/caravagn">caravagn</a>
+</li>
+</ul>
 </div>
-<div id="build-report" class="section level2">
-<h2 class="hasAnchor">
-<a href="#build-report" class="anchor"></a>Build report</h2>
-<table class="table">
-<thead><tr class="header">
-<th>Branch</th>
-<th>Stato CI</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td>master</td>
-<td><a href="https://travis-ci.org/caravagn/easypar"><img src="https://travis-ci.org/caravagn/easypar.svg?branch=master" alt="Build Status"></a></td>
-</tr></tbody>
-</table>
 </div>
 </div>
   </div>
@@ -109,7 +113,7 @@
 <ul class="list-unstyled">
 <li>Browse source code at <br><a href="https://github.com/caravagn/easypar">https://​github.com/​caravagn/​easypar</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/caravagn/CNAqc/easypar">https://​github.com/​caravagn/​CNAqc/​easypar</a>
+<li>Report a bug at <br><a href="https://github.com/caravagn/easypar/issues">https://​github.com/​caravagn/​easypar/​issues</a>
 </li>
 </ul>
 </div>
@@ -127,7 +131,13 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/caravagn/easypar"><img src="https://travis-ci.org/caravagn/easypar.svg?branch=master" alt="Travis build status"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
       <footer><div class="copyright">

@@ -20,4 +20,4 @@ Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
 URL: https://github.com/caravagn/easypar
-BugReports: https://github.com/caravagn/CNAqc/easypar
+BugReports: https://github.com/caravagn/easypar/issues
