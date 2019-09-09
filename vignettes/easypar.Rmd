@@ -74,13 +74,13 @@ print(inputs)
 `easypar` provides a single function that takes as input `f`, its list of inputs and some execution parameters for the type of execution requested. The simplest call runs `f` in parallel, without seeing any output and just receiving the return values in a list as follows
 ```{r}
 library(easypar)
-easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NA)
+easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NULL)
 ```
 We can control the amount (0 to 1) of cores to use at maximum (which are checked via `doPar`). Other combinations are also possible.
 
 * make each thread dump to a shared `rds` file its result, implementing a cache which is usefull if one want to real-time analyze output results (with another process).
 ```{r, eval=TRUE}
-easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NA, cache = "My_task.rds")
+easypar::run(FUN = f, PARAMS = inputs, parallel = TRUE, outfile = NULL, cache = "My_task.rds")
 
 # Check
 cache = readRDS("My_task.rds")
