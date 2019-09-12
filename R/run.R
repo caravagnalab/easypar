@@ -171,14 +171,18 @@ run = function(FUN,
     # With a progressbar
     pb = NULL
     if (progress_bar)
-      pb = txtProgressBar(min = 0,
-                          max = N,
-                          style = 3)
+      # pb = txtProgressBar(min = 0,
+      #                     max = N,
+      #                     style = 3)
+      pb <- progress_estimated(N, min_time = 2)
+    
 
     for (i in 1:N)
     {
       if (progress_bar)
-        setTxtProgressBar(pb, i)
+        pb$tick()$print()
+      
+        # setTxtProgressBar(pb, i)
 
       # Call the function, within an error handler
       tryCatch({
