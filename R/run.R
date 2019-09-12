@@ -21,6 +21,7 @@
 #' @import doParallel
 #' @import parallel
 #' @import foreach
+#' @import dplyr
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #'
 #'
@@ -174,7 +175,7 @@ run = function(FUN,
       # pb = txtProgressBar(min = 0,
       #                     max = N,
       #                     style = 3)
-      pb <- progress_estimated(N, min_time = 2)
+      pb <- dplyr::progress_estimated(n = N, min_time = 2)
     
 
     for (i in 1:N)
