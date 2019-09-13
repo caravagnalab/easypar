@@ -237,13 +237,13 @@ run_lsf = function(FUN,
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=
   
   # Notification
-  pio::pioTit("LSF submission script")
+  message("[easypar]: generated LSF submission script")
   cat(lsf_script)
   
-  pio::pioTit("Input file (head)")
+  message("[easypar]: generated input file from input data.frame")
   system(paste0('head ', input_file))
   
-  pio::pioTit("R script (head)")
+  message("[easypar]: generated R script from input function")
   system(paste0('head ', R_script))
   
   if(run)
