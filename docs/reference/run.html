@@ -196,7 +196,7 @@ execution modes for this task.</p>
 <span class='no'>dummy_params</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>lapply</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='no'>list</span>)
 
 <span class='co'># Default run: parallel, silent, output to screen</span>
-<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
+<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
 #&gt; [1] 1
 #&gt; 
 #&gt; $`2`
@@ -212,7 +212,7 @@ execution modes for this task.</p>
 #&gt; [1] 5
 #&gt; </div><div class='input'>
 <span class='co'># Run serially with progress_bar</span>
-<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding parallel execution setup [FALSE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
+<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding parallel execution setup [FALSE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
 #&gt; [1] 1
 #&gt; 
 #&gt; $`2`
@@ -227,7 +227,7 @@ execution modes for this task.</p>
 #&gt; $`5`
 #&gt; [1] 5
 #&gt; </div><div class='input'><span class='co'># Run serially without progress_bar</span>
-<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding parallel execution setup [FALSE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
+<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding parallel execution setup [FALSE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
 #&gt; [1] 1
 #&gt; 
 #&gt; $`2`
@@ -243,7 +243,7 @@ execution modes for this task.</p>
 #&gt; [1] 5
 #&gt; </div><div class='input'>
 <span class='co'># Run parallel, not silent, caching the results</span>
-<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>, <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='st'>"MyCache.rds"</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Computing 5 tasks.</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Caching outputs to : /Users/gcaravagna/Documents/Github/easypar/docs/reference/MyCache.rds</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Running sequentially.</span></div><div class='output co'>#&gt; $`1`
+<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>, <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='st'>"MyCache.rds"</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Computing 5 tasks.</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Caching outputs to : /Users/gcaravagna/Documents/Github/easypar/docs/reference/MyCache.rds</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Running sequentially.</span></div><div class='output co'>#&gt; $`1`
 #&gt; [1] 1
 #&gt; 
 #&gt; $`2`
@@ -260,7 +260,7 @@ execution modes for this task.</p>
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files'>file.remove</a></span>(<span class='st'>"MyCache.rds"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># Overwriting default setting with global options</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='kw'>easypar.parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>) <span class='co'># Will run sequentially</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
+<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>) <span class='co'># Will run sequentially</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
 #&gt; [1] 1
 #&gt; 
 #&gt; $`2`
@@ -276,7 +276,7 @@ execution modes for this task.</p>
 #&gt; [1] 5
 #&gt; </div><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='kw'>easypar.progress_bar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='co'># Will hide the progress bar</span>
-<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding progress bar setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
+<span class='fu'>run</span>(<span class='no'>dummy_fun</span>, <span class='no'>dummy_params</span>)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding parallel execution setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding progress bar setup [TRUE] with global option : FALSE</span></div><div class='output co'>#&gt; $`1`
 #&gt; [1] 1
 #&gt; 
 #&gt; $`2`
@@ -304,20 +304,12 @@ execution modes for this task.</p>
   },
   <span class='kw'>PARAMS</span> <span class='kw'>=</span> <span class='no'>dummy_params</span>,
   <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding parallel execution setup [TRUE] with global option : TRUE</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:09:31 - Overriding progress bar setup [TRUE] with global option : FALSE</span></div><div class='input'>
+)</div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding parallel execution setup [TRUE] with global option : TRUE</span></div><div class='output co'>#&gt; <span class='message'>[easypar] 2019-09-26 01:13:51 - Overriding progress bar setup [TRUE] with global option : FALSE</span></div><div class='input'>
 <span class='co'># Getters that can return the number of errors</span>
 <span class='co'># and filter them out</span>
 
-<span class='fu'><a href='numErrors.html'>numErrors</a></span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'>
-<span class='fu'><a href='filterErrors.html'>filterErrors</a></span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; $`1`
-#&gt; [1] 1
-#&gt; 
-#&gt; $`4`
-#&gt; [1] 4
-#&gt; 
-#&gt; $`5`
-#&gt; [1] 5
-#&gt; </div></pre>
+<span class='fu'><a href='numErrors.html'>numErrors</a></span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; [1] 5</div><div class='input'>
+<span class='fu'><a href='filterErrors.html'>filterErrors</a></span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
