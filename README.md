@@ -1,16 +1,26 @@
-# easypar
-
+# easypar <img src='man/figures/logo.png' align="right" height="139" />
 <!-- badges: start -->
 
 [![Travis build
 status](https://travis-ci.org/caravagn/easypar.svg?branch=master)](https://travis-ci.org/caravagn/easypar)
 <!-- badges: end -->
 
-This package provides a simple interface to implement a parallel computation in R, exploiting standard packages for parallelism like `foreach` and `doParallel`. 
+`easypar` makes it easy to implement parallel computations in R.
 
-For a function to be parallelized it is possible to pass it to `easypar` and abstract away the complexity of writing it in either parallel and non-parallel form (`for`-loops); in this way with a single piece of code the function can be run in parallel or not, which sometimes helps debugging etc. 
+#### Rationale
 
-At runtime, the parallel setup can be controlled as explained in the vignette - see `?run`.
+To use this package, you need to have a function that 
+carries out your desired computation. `easypar` will take care of the
+burden of  turning that function into a runnable parallel piece
+of code, offering two possible soilutions:
+
+* generating a parallel function call exploiting the `foreach` and 
+`doParallel` paradigms for parallel computing.
+
+* or generating a ready-to-use array job for the popular LSF 
+(Platform Load Sharing Facility) workload for distributed high performance computing.  
+
+With `easypar`, speeding up R computations through parallelism is a trivial task.
 
 #### Help and support
 

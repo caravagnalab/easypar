@@ -44,10 +44,8 @@ script is generated for a bash shell. The function can also run the
 LSF command `bsub` to submit the job, or just generate the required 
 files and prompt the user to submit the job via the shell. LSF parameters
 can be provided as a list of parameters, similarly modules and custom
-filenames for the generated scripts.
-Note: the queue and the project ID in `BSUB_config` should  
-always be provided as they are cluster-specific. Default values will
-prompt errors submitting the job." />
+filenames for the generated scripts." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -135,8 +133,8 @@ prompt errors submitting the job." />
     </div>
 
     <div class="ref-description">
-    <p>This function submits array jobs to LDF clusters.
-The input has to be a function that can carry out a full computation
+    <p>This function submits array jobs to LDF clusters.</p>
+<p>The input has to be a function that can carry out a full computation
 itself, plus a data.frame where each row represents the inputs that
 this function is expecting. The input data.frame is dumped to a file,
 the input function is wrapped inside an automatically generated R
@@ -145,10 +143,7 @@ script is generated for a bash shell. The function can also run the
 LSF command `bsub` to submit the job, or just generate the required 
 files and prompt the user to submit the job via the shell. LSF parameters
 can be provided as a list of parameters, similarly modules and custom
-filenames for the generated scripts.
-Note: the queue and the project ID in `BSUB_config` should  
-always be provided as they are cluster-specific. Default values will
-prompt errors submitting the job.</p>
+filenames for the generated scripts.</p>
     </div>
 
     <pre class="usage"><span class='fu'>run_lsf</span>(<span class='no'>FUN</span>, <span class='no'>PARAMS</span>, <span class='kw'>BSUB_config</span> <span class='kw'>=</span> <span class='fu'><a href='default_BSUB_config.html'>default_BSUB_config</a></span>(),
@@ -204,18 +199,26 @@ submission routines.</p></td>
       <th>run</th>
       <td><p>If `TRUE`, the function all attempt invoking `bsub` and submit
 the array jobs. Otherwise it will print to screen the instructions to run
-the job manually through the console. This asometimes voids some `command not found`
-types of errors, and is generally the safest option to submit the actual jobs.</p></td>
+the job manually through the console.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Nothing, this funciton just generates the required inputs to submit
-an array job via the LSF clusters.</p>
+an array job via the LSF clusters. If required, it also attempts submitting
+the jobs.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>The queue and the project ID in `BSUB_config` should  
+always be provided as they are cluster-specific. Default values will
+prompt errors submitting the job. Besides, we have found that automatic job submission
+can sometimes generate some `command not found` types of errors. Manual 
+submission seems generally the safest option to submit LSF jobs.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>default_BSUB_config</p></div>
+    <div class='dont-index'><p>See <code>default_BSUB_config</code> that is used to generate
+default parameters for LSF jobs.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># very dummy example function</span>
@@ -232,6 +235,7 @@ an array job via the LSF clusters.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -39,15 +39,16 @@ submission routines.}
 
 \item{run}{If `TRUE`, the function all attempt invoking `bsub` and submit
 the array jobs. Otherwise it will print to screen the instructions to run
-the job manually through the console. This asometimes voids some `command not found`
-types of errors, and is generally the safest option to submit the actual jobs.}
+the job manually through the console.}
 }
 \value{
 Nothing, this funciton just generates the required inputs to submit
-an array job via the LSF clusters.
+an array job via the LSF clusters. If required, it also attempts submitting
+the jobs.
 }
 \description{
 This function submits array jobs to LDF clusters.
+
 The input has to be a function that can carry out a full computation
 itself, plus a data.frame where each row represents the inputs that
 this function is expecting. The input data.frame is dumped to a file,
@@ -58,9 +59,13 @@ LSF command `bsub` to submit the job, or just generate the required
 files and prompt the user to submit the job via the shell. LSF parameters
 can be provided as a list of parameters, similarly modules and custom
 filenames for the generated scripts.
-Note: the queue and the project ID in `BSUB_config` should  
+}
+\note{
+The queue and the project ID in `BSUB_config` should  
 always be provided as they are cluster-specific. Default values will
-prompt errors submitting the job.
+prompt errors submitting the job. Besides, we have found that automatic job submission
+can sometimes generate some `command not found` types of errors. Manual 
+submission seems generally the safest option to submit LSF jobs.
 }
 \examples{
 # very dummy example function
@@ -75,5 +80,6 @@ run_lsf(FUN, PARAMS)
 }
 }
 \seealso{
-default_BSUB_config
+See \link{\code{default_BSUB_config}} that is used to generate
+default parameters for LSF jobs.
 }
