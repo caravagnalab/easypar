@@ -1,8 +1,3 @@
-/inst/doc/vignette.R
-/inst/doc/vignette.Rnw
-/vignettes/vignette.R
-/cfg.R
-
 # History files
 .Rhistory
 .Rapp
@@ -20,26 +15,9 @@
 *.Rdata
 *.Rproj
 
-# TRONCO Output
-*.pdf
-*.tar.gz
-*.tex
-*.mat
-*.zip
-*.png
-
-# Configuration file
-cfg.R
-
 # Other file
 *.log
 *.out
 *.toc
 .DS_Store
 
-# C++ file
-*.o
-*.so
-*.dll
-doc
-Meta
