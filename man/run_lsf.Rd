@@ -80,6 +80,6 @@ run_lsf(FUN, PARAMS)
 }
 }
 \seealso{
-See \link{\code{default_BSUB_config}} that is used to generate
+See \code{default_BSUB_config} that is used to generate
 default parameters for LSF jobs.
 }

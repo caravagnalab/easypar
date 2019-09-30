@@ -43,7 +43,7 @@
 #' the array jobs. Otherwise it will print to screen the instructions to run
 #' the job manually through the console. 
 #'
-#' @seealso See \link{\code{default_BSUB_config}} that is used to generate
+#' @seealso See \code{default_BSUB_config} that is used to generate
 #' default parameters for LSF jobs.
 #' 
 #' @return Nothing, this funciton just generates the required inputs to submit
