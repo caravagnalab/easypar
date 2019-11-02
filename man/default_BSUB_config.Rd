@@ -4,7 +4,9 @@
 \alias{default_BSUB_config}
 \title{Deafult BSUB setting to submit array jobs to LSF clusters.}
 \usage{
-default_BSUB_config()
+default_BSUB_config(J = "EASYPAR_Runner", P = "dummy_project",
+  q = "short", n = 1, R = "\\"span[hosts=1]\\"", W = "4:00",
+  o = paste0(J, "/output.\%J.\%I"), e = paste0(J, "/errors.\%J.\%I"))
 }
 \value{
 A named list of BSUB settings.
@@ -16,7 +18,7 @@ implement custom modificiations. These parameters are to be
 used by function \code{run_lsf}.
 }
 \examples{
-custom_BSUB = default_BSUB_config()
+custom_BSUB = default_BSUB_config(W = '12:00')
 custom_BSUB$`-J` = "Myjob"
 custom_BSUB$`-P` = "my_project"
 custom_BSUB$`-q` = "my_queue"

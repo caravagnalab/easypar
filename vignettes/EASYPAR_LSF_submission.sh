@@ -5,17 +5,17 @@
 #BSUB -q bioinformatics
 #BSUB -n 1
 #BSUB -R "span[hosts=1]"
-#BSUB -W 168:00
-#BSUB -o EASYPAR_Runner.output.%J.%I
-#BSUB -e EASYPAR_Runner.errors.%J.%I
+#BSUB -W 4:00
+#BSUB -o log/output.%J.%I
+#BSUB -e log/errors.%J.%I
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=
 # Automatic LSF script generated via easypar
-# 2019-09-30 01:40:14
+# 2019-11-02 12:50:47
 # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=
 
 # Required modules
-module load R/3.4.0 
+module load R/3.5.0 
 
 
 # Input file and R script

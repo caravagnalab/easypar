@@ -6,9 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vignette for easypar • easypar</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Vignette for easypar">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -39,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -65,7 +72,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/caravagn/easypar">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -78,6 +85,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -118,75 +126,75 @@
 <p>Consider a dummy function <code>f</code> that sleeps for some random time and then print the output.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">f =<span class="st"> </span><span class="cf">function</span>(x) </a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">{</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  clock =<span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Uniform">runif</a></span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  clock =<span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">  </a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Before sleep"</span>, x, <span class="st">" - siesta for "</span>, clock))</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Before sleep"</span>, x, <span class="st">" - siesta for "</span>, clock))</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.sleep">Sys.sleep</a></span>(clock)</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="kw"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span>(clock)</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"After sleep"</span>, x))</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"After sleep"</span>, x))</a>
 <a class="sourceLine" id="cb2-10" data-line-number="10">  </a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(x)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(x)</a>
 <a class="sourceLine" id="cb2-12" data-line-number="12">}</a></code></pre></div>
 <p><code>f</code> runs as</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">f</span>(<span class="dv">3</span>)</a></code></pre></div>
-<pre><code>## [1] "Before sleep 3  - siesta for  3.05503146839328"
+<pre><code>## [1] "Before sleep 3  - siesta for  0.849994699237868"
 ## [1] "After sleep 3"</code></pre>
 <pre><code>## [1] 3</code></pre>
 <p><strong>Input(s).</strong> We want to run <code>f</code> on 4 inputs (random univariate numbers). We store them in a list where each position is a full set of parameters that we want to pass to each calls to <code>f</code> (list of lists), named according to the actual parameter names.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">inputs =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Uniform">runif</a></span>(<span class="dv">4</span>), list)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(inputs)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">inputs =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">4</span>), list)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(inputs)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [[1]][[1]]
-## [1] 0.1716005
+## [1] 0.1459378
 ## 
 ## 
 ## [[2]]
 ## [[2]][[1]]
-## [1] 0.5924501
+## [1] 0.8572585
 ## 
 ## 
 ## [[3]]
 ## [[3]][[1]]
-## [1] 0.2499104
+## [1] 0.1586096
 ## 
 ## 
 ## [[4]]
 ## [[4]][[1]]
-## [1] 0.620842</code></pre>
+## [1] 0.6813303</code></pre>
 <p><code>easypar</code> provides a single function that takes as input <code>f</code>, its list of inputs and some execution parameters for the type of execution requested. The simplest call runs <code>f</code> in parallel, without seeing any output and just receiving the return values in a list as follows</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(easypar)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">easypar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/easypar/topics/run">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">outfile =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(easypar)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">easypar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/easypar/man/run.html">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">outfile =</span> <span class="ot">NULL</span>)</a></code></pre></div>
 <pre><code>## $`1`
-## [1] 0.1716005
+## [1] 0.1459378
 ## 
 ## $`2`
-## [1] 0.5924501
+## [1] 0.8572585
 ## 
 ## $`3`
-## [1] 0.2499104
+## [1] 0.1586096
 ## 
 ## $`4`
-## [1] 0.620842</code></pre>
+## [1] 0.6813303</code></pre>
 <p>We can control the amount (0 to 1) of cores to use at maximum (which are checked via <code>doPar</code>). Other combinations are also possible.</p>
 <ul>
 <li>make each thread dump to a shared <code>rds</code> file its result, implementing a cache which is usefull if one want to real-time analyze output results (with another process).</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">easypar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/easypar/topics/run">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">outfile =</span> <span class="ot">NULL</span>, <span class="dt">cache =</span> <span class="st">"My_task.rds"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">easypar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/easypar/man/run.html">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">outfile =</span> <span class="ot">NULL</span>, <span class="dt">cache =</span> <span class="st">"My_task.rds"</span>)</a></code></pre></div>
 <pre><code>## $`1`
-## [1] 0.1716005
+## [1] 0.1459378
 ## 
 ## $`2`
-## [1] 0.5924501
+## [1] 0.8572585
 ## 
 ## $`3`
-## [1] 0.2499104
+## [1] 0.1586096
 ## 
 ## $`4`
-## [1] 0.620842</code></pre>
+## [1] 0.6813303</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># Check</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">cache =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">readRDS</a></span>(<span class="st">"My_task.rds"</span>)</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(cache)</a></code></pre></div>
+<a class="sourceLine" id="cb12-2" data-line-number="2">cache =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span>(<span class="st">"My_task.rds"</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cache)</a></code></pre></div>
 <pre><code>## $`1`
 ## [1] 0.9229492
 ## 
@@ -305,46 +313,58 @@
 ## [1] 0.1716005
 ## 
 ## $`4`
-## [1] 0.620842</code></pre>
+## [1] 0.620842
+## 
+## $`2`
+## [1] 0.8572585
+## 
+## $`1`
+## [1] 0.1459378
+## 
+## $`3`
+## [1] 0.1586096
+## 
+## $`4`
+## [1] 0.6813303</code></pre>
 <ul>
 <li>get outputs to screen (asynchronous per thread) with <code>outfile</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">easypar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/easypar/topics/run">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">outfile =</span> <span class="st">''</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">easypar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/easypar/man/run.html">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">outfile =</span> <span class="st">''</span>)</a></code></pre></div>
 <pre><code>## $`1`
-## [1] 0.1716005
+## [1] 0.1459378
 ## 
 ## $`2`
-## [1] 0.5924501
+## [1] 0.8572585
 ## 
 ## $`3`
-## [1] 0.2499104
+## [1] 0.1586096
 ## 
 ## $`4`
-## [1] 0.620842</code></pre>
+## [1] 0.6813303</code></pre>
 <ul>
 <li>sequentially every tasks in a <code>for</code>-loop fashion</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">easypar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/easypar/topics/run">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">FALSE</span>, <span class="dt">outfile =</span> <span class="st">''</span>)</a></code></pre></div>
-<pre><code>## [1] "Before sleep 0.171600472880527  - siesta for  2.36236645840108"
-## [1] "After sleep 0.171600472880527"
-## [1] "Before sleep 0.592450105817989  - siesta for  3.08011987712234"
-## [1] "After sleep 0.592450105817989"
-## [1] "Before sleep 0.249910366488621  - siesta for  4.54265729174949"
-## [1] "After sleep 0.249910366488621"
-## [1] "Before sleep 0.620841952739283  - siesta for  1.79324436467141"
-## [1] "After sleep 0.620841952739283"</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">easypar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/easypar/man/run.html">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">FALSE</span>, <span class="dt">outfile =</span> <span class="st">''</span>)</a></code></pre></div>
+<pre><code>## [1] "Before sleep 0.145937800873071  - siesta for  1.03976470883936"
+## [1] "After sleep 0.145937800873071"
+## [1] "Before sleep 0.857258452335373  - siesta for  3.45431627822109"
+## [1] "After sleep 0.857258452335373"
+## [1] "Before sleep 0.158609554404393  - siesta for  3.19494720315561"
+## [1] "After sleep 0.158609554404393"
+## [1] "Before sleep 0.681330274324864  - siesta for  0.924063549609855"
+## [1] "After sleep 0.681330274324864"</code></pre>
 <pre><code>## $`1`
-## [1] 0.1716005
+## [1] 0.1459378
 ## 
 ## $`2`
-## [1] 0.5924501
+## [1] 0.8572585
 ## 
 ## $`3`
-## [1] 0.2499104
+## [1] 0.1586096
 ## 
 ## $`4`
-## [1] 0.620842</code></pre>
+## [1] 0.6813303</code></pre>
 </div>
 <div id="runtime-control-of-easypar" class="section level2">
 <h2 class="hasAnchor">
@@ -353,30 +373,30 @@
 <p>We can disable parallel executions easily.</p>
 <p>We have a <em>global option</em> to force the execution to go serial, whatever its source code default behaviour is (<code>parallel = TRUE</code> will not work).</p>
 <p>When <code>f</code> is plugged in a tool and called as</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">easypar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/easypar/topics/run">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">easypar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/easypar/man/run.html">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs)</a></code></pre></div>
 <p>which has default <code>parallel = TRUE</code>, and you set the global option <code>easypar.parallel</code>, <code>easypar</code> will run <code>f</code> sequentially.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">easypar.parallel =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">easypar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/easypar/topics/run">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## [easypar] 2019-09-30 01:40:03 - Overriding parallel execution setup [TRUE] with global option : FALSE</code></pre>
-<pre><code>## [1] "Before sleep 0.171600472880527  - siesta for  0.693532050354406"
-## [1] "After sleep 0.171600472880527"
-## [1] "Before sleep 0.592450105817989  - siesta for  2.17618336202577"
-## [1] "After sleep 0.592450105817989"
-## [1] "Before sleep 0.249910366488621  - siesta for  2.2667642054148"
-## [1] "After sleep 0.249910366488621"
-## [1] "Before sleep 0.620841952739283  - siesta for  1.94585236604325"
-## [1] "After sleep 0.620841952739283"</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="dt">easypar.parallel =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">easypar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/easypar/man/run.html">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [easypar] 2019-11-02 12:37:16 - Overriding parallel execution setup [TRUE] with global option : FALSE</code></pre>
+<pre><code>## [1] "Before sleep 0.145937800873071  - siesta for  3.97240873309784"
+## [1] "After sleep 0.145937800873071"
+## [1] "Before sleep 0.857258452335373  - siesta for  1.63305540918373"
+## [1] "After sleep 0.857258452335373"
+## [1] "Before sleep 0.158609554404393  - siesta for  4.53473343513906"
+## [1] "After sleep 0.158609554404393"
+## [1] "Before sleep 0.681330274324864  - siesta for  1.23222508351319"
+## [1] "After sleep 0.681330274324864"</code></pre>
 <pre><code>## $`1`
-## [1] 0.1716005
+## [1] 0.1459378
 ## 
 ## $`2`
-## [1] 0.5924501
+## [1] 0.8572585
 ## 
 ## $`3`
-## [1] 0.2499104
+## [1] 0.1586096
 ## 
 ## $`4`
-## [1] 0.620842</code></pre>
+## [1] 0.6813303</code></pre>
 </div>
 <div id="errors-handling" class="section level2">
 <h2 class="hasAnchor">
@@ -384,24 +404,24 @@
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co"># Hopefully r will crash at least once but not all calls</span></a>
 <a class="sourceLine" id="cb24-2" data-line-number="2">f =<span class="st"> </span><span class="cf">function</span>(x) </a>
 <a class="sourceLine" id="cb24-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">  <span class="cf">if</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Uniform">runif</a></span>(<span class="dv">1</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.5</span>) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stop">stop</a></span>(<span class="st">"Boom!!"</span>)</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">  <span class="cf">if</span>(<span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">1</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.5</span>) <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"Boom!!"</span>)</a>
 <a class="sourceLine" id="cb24-5" data-line-number="5">  </a>
 <a class="sourceLine" id="cb24-6" data-line-number="6">  <span class="st">"Ok"</span></a>
 <a class="sourceLine" id="cb24-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb24-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb24-9" data-line-number="9"><span class="co"># Restore parallel and run</span></a>
-<a class="sourceLine" id="cb24-10" data-line-number="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">easypar.parallel =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb24-11" data-line-number="11">runs =<span class="st"> </span>easypar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/easypar/topics/run">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">outfile =</span> <span class="ot">NULL</span>)</a></code></pre></div>
-<pre><code>## [easypar] 2019-09-30 01:40:10 - Overriding parallel execution setup [TRUE] with global option : TRUE</code></pre>
+<a class="sourceLine" id="cb24-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="dt">easypar.parallel =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb24-11" data-line-number="11">runs =<span class="st"> </span>easypar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/easypar/man/run.html">run</a></span>(<span class="dt">FUN =</span> f, <span class="dt">PARAMS =</span> inputs, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">outfile =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<pre><code>## [easypar] 2019-11-02 12:37:27 - Overriding parallel execution setup [TRUE] with global option : TRUE</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># inspect and filter function</span></a>
 <a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw"><a href="../reference/numErrors.html">numErrors</a></span>(runs)</a></code></pre></div>
-<pre><code>## [1] 0</code></pre>
+<pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">runs</a></code></pre></div>
 <pre><code>## $`1`
-## [1] "Ok"
+## &lt;simpleError in (function (x) {    if (runif(1) &gt; 0.5)         stop("Boom!!")    "Ok"})(0.145937800873071): Boom!!&gt;
 ## 
 ## $`2`
-## [1] "Ok"
+## &lt;simpleError in (function (x) {    if (runif(1) &gt; 0.5)         stop("Boom!!")    "Ok"})(0.857258452335373): Boom!!&gt;
 ## 
 ## $`3`
 ## [1] "Ok"
@@ -409,13 +429,7 @@
 ## $`4`
 ## [1] "Ok"</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw"><a href="../reference/filterErrors.html">filterErrors</a></span>(runs)</a></code></pre></div>
-<pre><code>## $`1`
-## [1] "Ok"
-## 
-## $`2`
-## [1] "Ok"
-## 
-## $`3`
+<pre><code>## $`3`
 ## [1] "Ok"
 ## 
 ## $`4`
@@ -439,17 +453,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Giulio Caravagna.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

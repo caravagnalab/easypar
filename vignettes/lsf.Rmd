@@ -11,37 +11,54 @@ vignette: >
   %\usepackage[UTF-8]{inputenc}
 ---
 
-`easypar`  can be used  to submit jobs to the LSF cluster system. 
+`easypar`  can be used  to generate scripts that submit array jobs to the LSF cluster system. 
 
-In particular, function  `run_lsf` generates all the required inputs to submit an
-array of jobs of any size.
+```{r, eval=FALSE}
+# Computation function 
+FUN = function(x, y){  ... }
+
+# Input for 25 array jobs that match FUN arguments
+PARAMS = data.frame(x = runif(25), y = runif(25))
+
+# Generates submission files 
+run_lsf(FUN, PARAMS)
+```
+
 
 #### Requirements
 
-To use  `run_lsf` you need:
+<!-- To use  `run_lsf` you need: -->
 
--   your computation to be wrapped into a function `FUN` that can run as a stand-alone R application (so something that would run if called via `Rscript`);
+-   a function `FUN` (e.g.,: `FUN = ls`) that can run as a stand-alone R application, with its own parameters. 
 
-- a input data.frame where every row rappresents an input for the function
-(as for `apply` by row). 
+> Note: `FUN` will be run as an indipendent process, so it should manage explicitly  its dependencies.
+
+- a input `dataframe` where every row rappresents an input for the `FUN` (as for `apply` by row). 
 
 The input should have column names without dots or spaces, as these
-will be used to match the arguments of `FUN` with the same ordering of the function definition. So for instance
-an input with 2-columns will only work if the function is expecting 2 parameters. The fist column will define the first parameter.
+will be used to match the arguments of `FUN` So for instance, an input with 2-columns will only work if the function is expecting 2 parameters. The fist column will define the first parameter.
+
 
 #### Output
 
-This function generates 3 files:
+`run_lsf` generates 3 files:
 
-- an R script wrapping the definition of your function `FUN`, as well as the required code to call that
-function using parameters from the command line. Your function in this script is called with a fake name;
+- an R script wrapping the definition of `FUN`, with extra code to call `FUN` using parameters from the command line. 
+Your function in this script is called with a fake name;
 
-- a `tsv` file containing the input `PARAMS`, without any header (column names), and row names. 
-function using parameters from the command line;
+- a `csv` file containing the input `PARAMS`, without any header (column names), and row names. 
 
 - a LSF array job submission script with `N` jobs where `N` are the rows of `PARAMS`.
 
-#### Customisations (required)
+
+Before submitting the job, you can test the computation. If the generated script (see below) is called `X` and the input file `Y`, you can test your function with 
+
+```{
+ head -1 Y | Rscript X
+```
+
+
+#### Customisations (optional and required)
 
 Some basic customisations are possibles, and some are **required**. 
 
@@ -50,7 +67,7 @@ In particular, cluster-specific BSUB instructions have to be specified, as expla
 Function `run_lsf` allows to:
 
 - specify a list of modules that will be added as dependencies of the LSF submission script. 
-  - For instance, `modules = 'R/3.4.0'` will generate the dependecy for a specific R version as `"module load R/3.4.0"` in the script.
+  - For instance, `modules = 'R/3.5.0'` will generate the dependecy for a specific R version as `"module load R/3.4.0"` in the script.
 
 - customize the BSUB parameters of the generated script. 
   
@@ -91,6 +108,13 @@ custom_BSUB$`-P` = "DKSMWOP331"
 
 # A queue name that is valid on the cluster
 custom_BSUB$`-q` = "bioinformatics"
+
+print(custom_BSUB)
+
+# Shorter version
+custom_BSUB = default_BSUB_config(J = 'bwa_aligner', P = 'DKSMWOP331', q = 'bioinformatics')
+
+print(custom_BSUB)
 ```
 
 Once the BSUB has been customized, you can either:
@@ -100,6 +124,8 @@ Once the BSUB has been customized, you can either:
 
 By default (`run = FALSE`) the `run_lsf` function outputs the shell command that should be used to submit the jobs, but leaves the user to submit the job. This is because we experienced some command line issues calling
 modules with a system call.
+
+#### Example
 
 An example computation follows.
 
@@ -116,10 +142,13 @@ PARAMS = data.frame(
   )
 
 # generates the input files, adding some module dependencies
-run_lsf(FUN, PARAMS, 
+run_lsf(FUN, 
+        PARAMS, 
         BSUB_config = custom_BSUB,
-        modules = 'R/3.4.0'
+        modules = 'R/3.5.0'
         )
 ```
 
-Command `bsub < EASYPAR_LSF_submission.sh` will submit the jobs to the cluster.
+#### Submitting the job
+
+If you do not try to run it automatically, command `bsub < EASYPAR_LSF_submission.sh` will submit the jobs to the cluster.

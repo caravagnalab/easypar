@@ -8,7 +8,8 @@ run_lsf(FUN, PARAMS, BSUB_config = default_BSUB_config(),
   modules = c("R/3.4.0"),
   input_file = "EASYPAR_LSF_input_jobarray.csv",
   R_script = "EASYPAR_LSF_Run.R",
-  Submission_script = "EASYPAR_LSF_submission.sh", run = FALSE)
+  Submission_script = "EASYPAR_LSF_submission.sh", output_folder = ".",
+  run = FALSE)
 }
 \arguments{
 \item{FUN}{A function that takes any arguments in input, and performs
@@ -36,6 +37,8 @@ a fake name in this script.}
 
 \item{Submission_script}{The name of the LSF script file that contains the 
 submission routines.}
+
+\item{output_folder}{The output of thsi function will be sent to this folder.}
 
 \item{run}{If `TRUE`, the function all attempt invoking `bsub` and submit
 the array jobs. Otherwise it will print to screen the instructions to run
