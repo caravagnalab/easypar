@@ -1,5 +1,5 @@
 
-# easypar <a href='https://caravagn.github.io/mobster'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# easypar <a href='https://caravagn.github.io/easypar'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 

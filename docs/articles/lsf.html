@@ -101,47 +101,63 @@
 
     
     
-<p><code>easypar</code> can be used to submit jobs to the LSF cluster system.</p>
-<p>In particular, function <code>run_lsf</code> generates all the required inputs to submit an array of jobs of any size.</p>
+<p><code>easypar</code> can be used to generate scripts that submit array jobs to the LSF cluster system.</p>
+<p>First, write in R your code.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Computation function </span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">FUN =<span class="st"> </span><span class="cf">function</span>(x, y){  ... }</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Input for 25 array jobs that match FUN arguments</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">PARAMS =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>))</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co"># Generates submission files </span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="../reference/run_lsf.html">run_lsf</a></span>(FUN, PARAMS)</a></code></pre></div>
+<p>Then, in your terminal.</p>
+<pre class="{"><code># Test if the generated script runs with the first input 
+head -1 EASYPAR_LSF_input_jobarray.csv | Rscript EASYPAR_LSF_Run.R
+
+# Submit array jobs (after loading the cluster module)
+bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
 <div id="requirements" class="section level4">
 <h4 class="hasAnchor">
 <a href="#requirements" class="anchor"></a>Requirements</h4>
-<p>To use <code>run_lsf</code> you need:</p>
+<!-- To use  `run_lsf` you need: -->
 <ul>
-<li><p>your computation to be wrapped into a function <code>FUN</code> (e.g.,: <code>FUN = ls</code>) that can run as a stand-alone R application - so something that would run if called via <code>Rscript</code>;</p></li>
-<li><p>a input <code>dataframe</code> where every row rappresents an input for the function (as for <code>apply</code> by row).</p></li>
+<li>a function <code>FUN</code> (e.g.,: <code>FUN = ls</code>) that can run as a stand-alone R application, with its own parameters and that manages explicitly its dependencies.</li>
 </ul>
-<p>The input should have column names without dots or spaces, as these will be used to match the arguments of <code>FUN</code> with the same ordering of the function definition. So for instance an input with 2-columns will only work if the function is expecting 2 parameters. The fist column will define the first parameter.</p>
+<blockquote>
+<p>Note: <code>FUN</code> will be run as an indipendent process.</p>
+</blockquote>
+<ul>
+<li>a dataframe <code>PARAMS</code> where every row is an input for <code>FUN</code>. The column order must match <code>FUN</code> arguments.</li>
+</ul>
+<p>Conceptually, you set up the data as for an <code><a href="https://rdrr.io/r/base/apply.html">apply(FUN, MARGIN = 1)</a></code> by row.</p>
+<p>The input should have column names without dots or spaces; these will match the arguments of <code>FUN</code>. So, for instance, an input with 2-columns will only work if <code>FUN</code> has 2 parameters.</p>
 </div>
 <div id="output" class="section level4">
 <h4 class="hasAnchor">
 <a href="#output" class="anchor"></a>Output</h4>
-<p>This function generates 3 files:</p>
+<p><code>run_lsf</code> generates 3 files:</p>
 <ul>
-<li><p>an R script wrapping the definition of your function <code>FUN</code>, as well as the required code to call that function using parameters from the command line. Your function in this script is called with a fake name;</p></li>
+<li><p>an R script wrapping the definition of <code>FUN</code>, with extra code to call <code>FUN</code> using parameters from the command line. Your function in this script is called with a fake name;</p></li>
 <li><p>a <code>csv</code> file containing the input <code>PARAMS</code>, without any header (column names), and row names.</p></li>
 <li><p>a LSF array job submission script with <code>N</code> jobs where <code>N</code> are the rows of <code>PARAMS</code>.</p></li>
 </ul>
+<p>Before submitting the job, test the computation as explained above.</p>
 </div>
-<div id="customisations-optional-and-required" class="section level4">
+<div id="customising-jobs" class="section level4">
 <h4 class="hasAnchor">
-<a href="#customisations-optional-and-required" class="anchor"></a>Customisations (optional and required)</h4>
-<p>Some basic customisations are possibles, and some are <strong>required</strong>.</p>
-<p>In particular, cluster-specific BSUB instructions have to be specified, as explained below, as well as other dependencies which depend on modules available on the cluster.</p>
+<a href="#customising-jobs" class="anchor"></a>Customising jobs</h4>
+<p>Cluster-specific BSUB instructions can be specified, as well as other dependencies from modules available on the cluster.</p>
 <p>Function <code>run_lsf</code> allows to:</p>
 <ul>
-<li>specify a list of modules that will be added as dependencies of the LSF submission script.
-<ul>
-<li>For instance, <code>modules = 'R/3.5.0'</code> will generate the dependecy for a specific R version as <code>"module load R/3.4.0"</code> in the script.</li>
+<li><p>specify a list of modules that will be added as dependencies of the LSF submission script. For instance, <code>modules = 'R/3.5.0'</code> will generate the dependecy for a specific R version (<code>3.5.0</code>).</p></li>
+<li><p>customize the BSUB parameters of the generated script.</p></li>
 </ul>
-</li>
-<li>customize the BSUB parameters of the generated script.</li>
-</ul>
-<p>Default BSUB parameters parameters <strong>have to be updated according to your cluster setup</strong>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(easypar)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># Default parameters in the package</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>()</a></code></pre></div>
+<p>The package comes with a default BSUB configuration, that <strong>has to be updated according to your cluster setup</strong>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(easypar)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># Default parameters in the package</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>()</a></code></pre></div>
 <pre><code>## $`-J`
 ## [1] "EASYPAR_Runner"
 ## 
@@ -184,18 +200,18 @@
 <p>It is required to modify the default values of <code>-P</code> and <code>-q</code>, the project and queue ID, according to your LSF configuration. Otherwise, the submission script will generate an error becaue the default values do not mean anything.</p>
 </blockquote>
 <p>Modifications are done to the default list of parameters; other BSUB flags can be used as well. No checkings on their correctness are done by <code>easypar</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">custom_BSUB =<span class="st"> </span><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>()</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># More informative job ID</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-J</span><span class="st">`</span> =<span class="st"> "bwa_aligner"</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co"># A token for a project allowed to run on the cluster</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-P</span><span class="st">`</span> =<span class="st"> "DKSMWOP331"</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co"># A queue name that is valid on the cluster</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-q</span><span class="st">`</span> =<span class="st"> "bioinformatics"</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(custom_BSUB)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">custom_BSUB =<span class="st"> </span><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>()</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># More informative job ID</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-J</span><span class="st">`</span> =<span class="st"> "bwa_aligner"</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># A token for a project allowed to run on the cluster</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-P</span><span class="st">`</span> =<span class="st"> "DKSMWOP331"</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co"># A queue name that is valid on the cluster</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-q</span><span class="st">`</span> =<span class="st"> "bioinformatics"</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(custom_BSUB)</a></code></pre></div>
 <pre><code>## $`-J`
 ## [1] "bwa_aligner"
 ## 
@@ -219,10 +235,10 @@
 ## 
 ## $`-e`
 ## [1] "log/errors.%J.%I"</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Shorter version</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">custom_BSUB =<span class="st"> </span><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>(<span class="dt">J =</span> <span class="st">'bwa_aligner'</span>, <span class="dt">P =</span> <span class="st">'DKSMWOP331'</span>, <span class="dt">q =</span> <span class="st">'bioinformatics'</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(custom_BSUB)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Shorter version</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">custom_BSUB =<span class="st"> </span><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>(<span class="dt">J =</span> <span class="st">'bwa_aligner'</span>, <span class="dt">P =</span> <span class="st">'DKSMWOP331'</span>, <span class="dt">q =</span> <span class="st">'bioinformatics'</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(custom_BSUB)</a></code></pre></div>
 <pre><code>## $`-J`
 ## [1] "bwa_aligner"
 ## 
@@ -257,23 +273,23 @@
 <h4 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h4>
 <p>An example computation follows.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># A simple function that prints some outputs</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">FUN =<span class="st"> </span><span class="cf">function</span>(x, y){ </a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(x, y) </a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co"># input for 25 array jobs</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">PARAMS =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>), </a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">  <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">  )</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co"># generates the input files, adding some module dependencies</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="kw"><a href="../reference/run_lsf.html">run_lsf</a></span>(FUN, </a>
-<a class="sourceLine" id="cb7-14" data-line-number="14">        PARAMS, </a>
-<a class="sourceLine" id="cb7-15" data-line-number="15">        <span class="dt">BSUB_config =</span> custom_BSUB,</a>
-<a class="sourceLine" id="cb7-16" data-line-number="16">        <span class="dt">modules =</span> <span class="st">'R/3.5.0'</span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">        )</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># A simple function that prints some outputs</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">FUN =<span class="st"> </span><span class="cf">function</span>(x, y){ </a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(x, y) </a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co"># input for 25 array jobs</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">PARAMS =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">  <span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>), </a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">  <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">  )</a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co"># generates the input files, adding some module dependencies</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="kw"><a href="../reference/run_lsf.html">run_lsf</a></span>(FUN, </a>
+<a class="sourceLine" id="cb9-14" data-line-number="14">        PARAMS, </a>
+<a class="sourceLine" id="cb9-15" data-line-number="15">        <span class="dt">BSUB_config =</span> custom_BSUB,</a>
+<a class="sourceLine" id="cb9-16" data-line-number="16">        <span class="dt">modules =</span> <span class="st">'R/3.5.0'</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17">        )</a></code></pre></div>
 <pre><code>## Destination folder for the LSF scripts and inputs:  . 
 ## Creating folder for output and error logs:  log</code></pre>
 <pre><code>## Warning in dir.create(folder[1]): 'log' already exists</code></pre>
@@ -291,7 +307,7 @@
 ## 
 ## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=
 ## # Automatic LSF script generated via easypar
-## # 2019-11-02 12:37:32
+## # 2019-11-02 15:15:53
 ## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=
 ## 
 ## # Required modules
