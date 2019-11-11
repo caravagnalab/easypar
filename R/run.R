@@ -15,6 +15,7 @@
 #' @param outfile Output file for the parallel thread, default \code{""} is console, \code{NA} is the default.
 #' @param cache Cache is used during computation to dump results to a template RDS file.
 #' @param progress_bar Boolean value, default TRUE. Print a progress_bar during the execution.
+#' @param filter_errors If `TRUE`, errors intercepted are filtered before returning results.
 #'
 #' @return
 #'
@@ -67,7 +68,8 @@
 #'     x
 #'   },
 #'   PARAMS = dummy_params,
-#'   silent = TRUE
+#'   silent = TRUE,
+#'   filter_errors = FALSE
 #' )
 #'
 #' # Getters that can return the number of errors
@@ -76,6 +78,17 @@
 #' numErrors(results)
 #'
 #' filterErrors(results)
+#' 
+#' #' Can do this automatically with filter_errors = TRUE
+#' results = run(
+#'   FUN = function(x) {
+#'     if(runif(1) > .5) stop("Some error")
+#'     x
+#'   },
+#'   PARAMS = dummy_params,
+#'   silent = TRUE,
+#'   filter_errors = TRUE
+#' )
 run = function(FUN,
                PARAMS,
                packages = NULL,
@@ -85,7 +98,8 @@ run = function(FUN,
                silent = TRUE,
                outfile = "",
                cache = NULL,
-               progress_bar = TRUE)
+               progress_bar = TRUE,
+               filter_errors = TRUE)
 {
   # =-=-=-=-=-=-=-=-=-=-=-
   # Stop on error if input is not correct
@@ -172,36 +186,30 @@ run = function(FUN,
     # With a progressbar
     pb = NULL
     if (progress_bar)
-      # pb = txtProgressBar(min = 0,
-      #                     max = N,
-      #                     style = 3)
       pb <- dplyr::progress_estimated(n = N, min_time = 2)
     
-
     for (i in 1:N)
     {
-      if (progress_bar)
-        pb$tick()$print()
+      if (progress_bar) pb$tick()$print()
       
-        # setTxtProgressBar(pb, i)
-
+      r = errorCondition("FUN raised error.")
       # Call the function, within an error handler
       tryCatch({
         r = do.call(FUN, PARAMS[[i]])
 
         # cache if required
         cacheit(r, cache, i)
-
-        R = append(R, list(r))
-        names(R)[length(R)] = i 
       },
       error = function(e)
       {
         # Intercepted error
         message('[easypar] run ', i, ' - ',  e)
-        # return(e)
-      })
-
+      }
+      )
+      
+      # Append
+      R = append(R, list(r))
+      names(R)[length(R)] = i 
     }
   }
 
@@ -267,6 +275,16 @@ run = function(FUN,
   # Release cluster handle
   if (parallel)
     stopcl(cluster_handle, silent)
+  
+  # =-=-=-=-=-=-=-=-=-=-=-
+  # Filter errors - use getters, be silent
+  # =-=-=-=-=-=-=-=-=-=-=-
+  if(filter_errors)
+  {
+    if(numErrors(R) > 0) message("[easypar] ", numErrors(R), '/', N, " computations returned errors and will be removed.")
+      
+    R = filterErrors(R)
+  }
 
   return(R)
 }

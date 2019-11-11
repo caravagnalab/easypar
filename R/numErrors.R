@@ -27,6 +27,6 @@
 #' numErrors(results)
 numErrors = function(R)
 {
-  errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
+  errs = sapply(R, function(w) inherits(w, 'error') | inherits(w, 'simpleError') | inherits(w, 'try-error'))
   sum(errs)
 }

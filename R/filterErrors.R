@@ -29,7 +29,7 @@ filterErrors = function(R)
 
   if(ner == length(R)) return(NULL)
 
-  errs = sapply(R, function(w) inherits(w, 'simpleError') | inherits(w, 'try-error'))
+  errs = sapply(R, function(w) inherits(w, 'error') | inherits(w, 'simpleError') | inherits(w, 'try-error'))
 
   R[!errs]
 }
