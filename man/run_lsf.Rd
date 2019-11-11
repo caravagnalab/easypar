@@ -5,7 +5,7 @@
 \title{Submit array jobs to LSF clusters.}
 \usage{
 run_lsf(FUN, PARAMS, BSUB_config = default_BSUB_config(),
-  modules = c("R/3.4.0"),
+  modules = c("R/3.5.0"),
   input_file = "EASYPAR_LSF_input_jobarray.csv",
   R_script = "EASYPAR_LSF_Run.R",
   Submission_script = "EASYPAR_LSF_submission.sh", output_folder = ".",
@@ -24,8 +24,8 @@ The queue and the project ID should always be provided as they are cluster-speci
 Otherwise, default values will prompt errors submitting the job.}
 
 \item{modules}{A list of modules that will be added as dependencies of the
-LSF submission script. For instance \code{modules = 'R/3.4.0'} will generate
-the dependecy for a specific R version as \code{"module load R/3.4.0"}.}
+LSF submission script. For instance \code{modules = 'R/3.5.0'} will generate
+the dependecy for a specific R version as \code{"module load R/3.5.0"}.}
 
 \item{input_file}{The name of the data.frame input file that is generated
 from \code{PARAMS}. This file contains no header, and no row names.}

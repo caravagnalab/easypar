@@ -6,7 +6,7 @@
 \usage{
 run(FUN, PARAMS, packages = NULL, export = NULL, cores.ratio = 0.8,
   parallel = TRUE, silent = TRUE, outfile = "", cache = NULL,
-  progress_bar = TRUE)
+  progress_bar = TRUE, filter_errors = TRUE)
 }
 \arguments{
 \item{FUN}{R function to run}
@@ -28,6 +28,8 @@ run(FUN, PARAMS, packages = NULL, export = NULL, cores.ratio = 0.8,
 \item{cache}{Cache is used during computation to dump results to a template RDS file.}
 
 \item{progress_bar}{Boolean value, default TRUE. Print a progress_bar during the execution.}
+
+\item{filter_errors}{If `TRUE`, errors intercepted are filtered before returning results.}
 }
 \value{
 
@@ -77,7 +79,8 @@ results = run(
     x
   },
   PARAMS = dummy_params,
-  silent = TRUE
+  silent = TRUE,
+  filter_errors = FALSE
 )
 
 # Getters that can return the number of errors
@@ -86,4 +89,15 @@ results = run(
 numErrors(results)
 
 filterErrors(results)
+
+#' Can do this automatically with filter_errors = TRUE
+results = run(
+  FUN = function(x) {
+    if(runif(1) > .5) stop("Some error")
+    x
+  },
+  PARAMS = dummy_params,
+  silent = TRUE,
+  filter_errors = TRUE
+)
 }

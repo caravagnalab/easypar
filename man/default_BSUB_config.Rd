@@ -6,7 +6,7 @@
 \usage{
 default_BSUB_config(J = "EASYPAR_Runner", P = "dummy_project",
   q = "short", n = 1, R = "\\"span[hosts=1]\\"", W = "4:00",
-  o = paste0(J, "/output.\%J.\%I"), e = paste0(J, "/errors.\%J.\%I"))
+  o = "log/output.\%J.\%I", e = "log/errors.\%J.\%I")
 }
 \value{
 A named list of BSUB settings.

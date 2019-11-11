@@ -30,6 +30,8 @@
 #' @param modules A list of modules that will be added as dependencies of the
 #' LSF submission script. For instance \code{modules = 'R/3.5.0'} will generate
 #' the dependecy for a specific R version as \code{"module load R/3.5.0"}.
+#' @param extra_commands Extra set of commands that will be executed in the submission
+#' script right after modules declaration.
 #' @param input_file The name of the data.frame input file that is generated
 #' from \code{PARAMS}. This file contains no header, and no row names.
 #' @param R_script The name of the R script file that contains the definition
@@ -69,6 +71,7 @@ run_lsf = function(FUN,
                PARAMS,
                BSUB_config = default_BSUB_config(),
                modules = c('R/3.5.0'),
+               extra_commands = NULL,
                input_file = 'EASYPAR_LSF_input_jobarray.csv',
                R_script = 'EASYPAR_LSF_Run.R',
                Submission_script =  'EASYPAR_LSF_submission.sh',
@@ -199,7 +202,7 @@ run_lsf = function(FUN,
       paste0('module load ', m, ' ', '\n')
     })
   modules = Reduce(paste0, modules)
-    
+  
   # Assemble LSF commands, info and modules
   header = paste0(
     shell, separator,
@@ -209,6 +212,7 @@ run_lsf = function(FUN,
     separator,
     "# Required modules\n",
     modules,
+    extra_commands,
     separator
   )
   
