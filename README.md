@@ -5,6 +5,8 @@
 
 [![Travis build
 status](https://travis-ci.org/caravagn/easypar.svg?branch=master)](https://travis-ci.org/caravagn/easypar)
+[![Github All
+Releases](https://img.shields.io/github/downloads/caravagn/easypar/total.svg)]()
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
