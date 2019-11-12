@@ -47,7 +47,7 @@ Consider a dummy function `f` that sleeps for some random time and then print th
 ```{r}
 f = function(x) 
 {
-  clock = 5 * runif(1)
+  clock = 2 * runif(1)
   
   print(paste("Before sleep", x, " - siesta for ", clock))
   

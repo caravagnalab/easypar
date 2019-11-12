@@ -192,7 +192,8 @@ run = function(FUN,
     {
       if (progress_bar) pb$tick()$print()
       
-      r = errorCondition("FUN raised error.")
+      # r = errorCondition("FUN raised error.")
+      r = simpleError("FUN raised error.")
       # Call the function, within an error handler
       tryCatch({
         r = do.call(FUN, PARAMS[[i]])
