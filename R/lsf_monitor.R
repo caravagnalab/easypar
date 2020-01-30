@@ -3,8 +3,8 @@
 # PARAMS = data.frame(x = runif(25), y = runif(25))
 # run_lsf(FUN, PARAMS)
 
-errors_folder = "~/Documents/Github/test.dbpmm//analysis_pipeline//logs_test_cases/"
-PID = '79459'
+# errors_folder = "~/Documents/Github/test.dbpmm//analysis_pipeline//logs_test_cases/"
+# PID = '79459'
 
 logs_inspector = function(BSUB_config, PID, errors_folder)
 {
@@ -16,7 +16,7 @@ logs_inspector = function(BSUB_config, PID, errors_folder)
     return(NULL)
   }
   
-  cli::cli_alert_success(paste0(crayon::bold("Array Job"), ": n = {.value {length(log_files)}} inside {.field {errors_folder}}"))
+  cli::cli_alert_success(paste0(crayon::bold("Array Job"), ": n = {.value {length(log_files)}} files inside {.field {errors_folder}}"))
   
   out_files  = log_files[grepl(log_files, pattern = '.out.')]
   err_files  = log_files[grepl(log_files, pattern = '.err.')]
