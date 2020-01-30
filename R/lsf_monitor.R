@@ -2,11 +2,11 @@
 # FUN = function(x, y){ if(runif(1) > .7) stop("Atrocious") else print(x, y) }
 # PARAMS = data.frame(x = runif(25), y = runif(25))
 # run_lsf(FUN, PARAMS)
-
-# errors_folder = "~/Documents/Github/test.dbpmm//analysis_pipeline//logs_test_cases/"
-# PID = '79459'
-
-logs_inspector = function(BSUB_config, PID, errors_folder)
+# errors_folder = "/Users/gcaravagna/Documents/Davros/Hartwig_analysis/log_deconvolution"
+# PID = '61424'
+# BSUB_config = easypar::default_BSUB_config()
+# logs_inspector(BSUB_config, PID, errors_folder)
+logs_inspector = function(BSUB_config, PID, errors_folder, input_file)
 {
   log_files = list.files(path = errors_folder, full.names = TRUE)
   log_files = log_files[grepl(log_files, pattern = PID)]
@@ -16,7 +16,7 @@ logs_inspector = function(BSUB_config, PID, errors_folder)
     return(NULL)
   }
   
-  cli::cli_alert_success(paste0(crayon::bold("Array Job"), ": n = {.value {length(log_files)}} files inside {.field {errors_folder}}"))
+  cli::cli_alert_success(paste0(crayon::bold("Array Job"), ": n = {.value {length(log_files)}} files for PID {.field {PID}} inside {.field {errors_folder}}"))
   
   out_files  = log_files[grepl(log_files, pattern = '.out.')]
   err_files  = log_files[grepl(log_files, pattern = '.err.')]
@@ -31,13 +31,15 @@ logs_inspector = function(BSUB_config, PID, errors_folder)
     return(NULL)
   }
   
+  cli::cli_h2("Scanning log files")
+  
   # Check for Succesfull job keyword
   status_jobs = easypar::run(
     FUN = scan_logfile,
     PARAMS = lapply(out_files, list),
     parallel = FALSE
   )
-
+  
   # process ID
   ids = sapply(out_files, basename) %>%
     strsplit(split = '\\.') %>%
@@ -52,67 +54,47 @@ logs_inspector = function(BSUB_config, PID, errors_folder)
     exit_status = status_jobs %>% unlist,
     stringsAsFactors = FALSE
   ) %>%
-    as_tibble() %>%
-    arrange(ids) %>%
-    mutate(label = ifelse(exit_status, "Successful", "With error"))
+    tibble::as_tibble() %>%
+    dplyr::arrange(ids) %>%
+    dplyr::mutate(label = ifelse(exit_status, "Successful", "With error"))
   
-  pio::pioDisp(table_logs %>% group_by(label) %>% summarise(N = n()))
+  
+  cat("\n")
+  sumtab = table_logs %>% group_by(label) %>% summarise(N = n())
+  if('Successful' %in% sumtab$label) cli::cli_alert_success("n = {.value {sumtab %>% dplyr::filter(label == 'Successful') %>% pull(N)}} / {.value {nrow(table_logs)}} succesfull tasks.")
+  if('With error' %in% sumtab$label) cli::cli_alert_danger("n = {.value {sumtab %>% dplyr::filter(label == 'With error') %>% pull(N)}} / {.value {nrow(table_logs)}} tasks with error.")
+  cat("\n")
+  
   
   errors = table_logs %>% filter(!exit_status)
   
-  error_jobs = easypar::run(
-    FUN = scan_errfile,
-    PARAMS = lapply(errors$err_file, list),
-    parallel = FALSE
-  )
-  
-  error_jobs = error_jobs %>% unlist
-  
-  pio::pioTit("Errors extracted from log files")
-  w = sapply(seq_along(error_jobs),
-         function(x)
-          {
-           pio::pioTit(errors$input_id[x])
-           cat(error_jobs[x])
-           cat("\n\n")
-         })
-  
-  # Cases OK and NOT OK
-  OK = table_logs %>% 
-    dplyr::filter(exit_status) %>% 
-    dplyr::select(err_file, out_file) 
-  
-  NOK = table_logs %>% 
-    dplyr::filter(!exit_status) %>% 
-    dplyr::select(err_file, out_file) 
-  
-  # Tar + Gzip for logs OK cases
-  out_tar = paste0(errors_folder, '/ok_logs_inspector.tar.gz')
-  pio::pioStr("Compressing OK jobs: ", out_tar, suffix = '\n')
-  
-  tar(out_tar, 
-      files = OK %>% unlist,
-      compression = c("gzip"))
-  
-  # Remove the files  OK
-  # w = sapply(OK %>% unlist, file.remove)
-  # 
-  out_fold = paste0(errors_folder, '/ok_logs')
-  pio::pioStr("Moving OK jobs: ", out_fold, suffix = '\n')
-
-  dir.create(out_fold)
-  copy_jobs = easypar::run(
-    FUN = function(x){
-           file.copy(from = x, to = paste0(out_fold, '/', basename(x)), overwrite = TRUE)
-           # file.remove(x)
-           },
-    PARAMS = lapply(OK %>% unlist, list),
-    parallel = FALSE
+  if(nrow(errors) == 0) {
+    cli::cli_alert_success("No jobs with errors, fantastic ...")
+  }
+  else
+  {
+    error_jobs = easypar::run(
+      FUN = scan_errfile,
+      PARAMS = lapply(errors$err_file, list),
+      parallel = FALSE
     )
     
-  
-         
-  
+    error_jobs = error_jobs %>% unlist
+    
+    table_logs$err_log = NA
+    table_logs$err_log[!table_logs$exit_status] = error_jobs
+    
+    w = sapply(seq_along(error_jobs),
+           function(x)
+            {
+             cat('\n')
+             cli::rule(left = paste0("Error log from job id: ", crayon::red(errors$input_id[x])), right = paste0(errors$err_file[x]), line = 2) %>% cat
+             cat(error_jobs[x])
+             cat("\n")
+           })
+    }
+    
+  invisible(clean_up_lsf_logs(table_logs, errors_folder, PID))
 }
 
 scan_logfile = function(f)
@@ -173,3 +155,49 @@ scan_errfile = function(f)
 #   message("Submission did not go fantastic..")
 # }
 
+clean_up_lsf_logs = function(table_logs, errors_folder, PID)
+{
+  # Cases OK and NOT OK
+  OK = table_logs %>% 
+    dplyr::filter(exit_status) %>% 
+    dplyr::select(err_file, out_file) 
+
+  NOK = table_logs %>% 
+    dplyr::filter(!exit_status) %>% 
+    dplyr::select(err_file, out_file) 
+  
+  if(nrow(OK) == 0) return(TRUE)
+  
+  cat('\n')
+  cli::cli_h2("Re-organising the log folders {.field {errors_folder}}")
+  cat('\n')
+  
+  
+  # ZIP for logs OK cases
+  out_tar = paste0(errors_folder, '/ok_logs_inspector.', PID, '.zip')
+
+  cli::cli_process_start(paste0("Compressing n = {.value {nrow(OK)}} OK logs to: {.field {out_tar}}, cancelling original log files afterwards."))
+  
+  capture.output(zip(out_tar,files = OK %>% unlist))
+  
+  cli::cli_alert(paste0("Zip file created: ", utils:::format.object_size(file.info(out_tar)$size, "auto")))
+  
+  # Remove the files  OK
+  w = sapply(OK %>% unlist, file.remove)
+  # 
+  out_fold = paste0(errors_folder, '/ok_logs')
+  cli::cli_process_done()
+  
+  # pio::pioStr("Moving OK jobs: ", out_fold, suffix = '\n')
+  # 
+  # dir.create(out_fold)
+  # copy_jobs = easypar::run(
+  #   FUN = function(x){
+  #     file.copy(from = x, to = paste0(out_fold, '/', basename(x)), overwrite = TRUE)
+  #     # file.remove(x)
+  #   },
+  #   PARAMS = lapply(OK %>% unlist, list),
+  #   parallel = FALSE
+  # )
+  
+}
