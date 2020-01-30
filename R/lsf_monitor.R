@@ -1,15 +1,35 @@
+#' # very dummy example function
+# FUN = function(x, y){ if(runif(1) > .7) stop("Atrocious") else print(x, y) }
+# PARAMS = data.frame(x = runif(25), y = runif(25))
+# run_lsf(FUN, PARAMS)
+
+errors_folder = "~/Documents/Github/test.dbpmm//analysis_pipeline//logs_test_cases/"
+PID = '79459'
+
 logs_inspector = function(BSUB_config, PID, errors_folder)
 {
   log_files = list.files(path = errors_folder, full.names = TRUE)
   log_files = log_files[grepl(log_files, pattern = PID)]
   
-  cat(paste0("Array Job: N = ", length(log_files), '\t\t[ ', errors_folder, ' ]\n'))
+  if(length(log_files) == 0) {
+    cli::cli_alert_danger("No jobs with that PID {.field {PID}} inside {.field {errors_folder}}")
+    return(NULL)
+  }
+  
+  cli::cli_alert_success(paste0(crayon::bold("Array Job"), ": n = {.value {length(log_files)}} inside {.field {errors_folder}}"))
   
   out_files  = log_files[grepl(log_files, pattern = '.out.')]
   err_files  = log_files[grepl(log_files, pattern = '.err.')]
   
-  # out_files = out_files[1:100]
-  # err_files = err_files[1:100]
+  if(length(out_files) == 0) {
+    cli::cli_alert_danger("Output files for PID {.field {PID}} should be named *.out.*")
+    return(NULL)
+  }
+
+  if(length(err_files) == 0) {
+    cli::cli_alert_danger("Error files for PID {.field {PID}} should be named *.err.*")
+    return(NULL)
+  }
   
   # Check for Succesfull job keyword
   status_jobs = easypar::run(

@@ -95,7 +95,8 @@ run_lsf = function(FUN,
     setwd(output_folder)
   } 
   
-  cat("Destination folder for the LSF scripts and inputs: ", output_folder, '\n')
+  cli::cli_rule("easypar: LSF array jobs generator")
+  cli::cli_alert("Destination folder: {.field {output_folder}}\n")
   
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=
   # PARAMS go int an output file
@@ -277,20 +278,16 @@ run_lsf = function(FUN,
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=
   
   # Notification
-  message("[easypar]: generated LSF submission script")
-  cat(lsf_script)
-  
-  message("[easypar]: generated input file from input data.frame")
+  cli::cli_alert_success("LSF submission script: {.field {lsf_script}} (R runner: {.field {R_script}})")
+  cli::cli_alert_success(" Input file (head of): {.field {input_file}}")
   system(paste0('head ', input_file))
-  
-  message("[easypar]: generated R script from input function")
-  system(paste0('head ', R_script))
   
   if(run)
   {
     # query for submission confirmation
     cat(separator, separator)
     repeat{
+      flush.console()
       cat(paste0('Submit N = ', nrow(PARAMS), ' job(s) ? [Yes/no] '))
       answer = readline()
       
@@ -315,8 +312,16 @@ run_lsf = function(FUN,
     }
   }
   else{
-    message("\nScripts generated, submit your job with the following shell command.\n")
-    cat(paste0('bsub < ', Submission_script), '\n')
+    cli::cli_h2(paste0(crayon::white('Scripts generated')))
+    cat('\n')
+    
+    # message("\nScripts generated, submit your job with the following shell command.\n")
+    # cat(paste0('bsub < ', Submission_script), '\n')
+    
+    cli::cat_line(paste0(crayon::yellow('Job submission:'),  ' bsub < ', Submission_script))
+    cli::cat_line(paste0(crayon::yellow('   Job testing:'),  ' Rscript ', 
+                         R_script, ' ', paste0(PARAMS[1, ], collapse = ' ')))
+    
   }
   
   setwd(current_wd)
