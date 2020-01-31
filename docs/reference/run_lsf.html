@@ -158,7 +158,7 @@ filenames for the generated scripts.</p>
     </div>
 
     <pre class="usage"><span class='fu'>run_lsf</span>(<span class='no'>FUN</span>, <span class='no'>PARAMS</span>, <span class='kw'>BSUB_config</span> <span class='kw'>=</span> <span class='fu'><a href='default_BSUB_config.html'>default_BSUB_config</a></span>(),
-  <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"R/3.4.0"</span>),
+  <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"R/3.5.0"</span>), <span class='kw'>extra_commands</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>input_file</span> <span class='kw'>=</span> <span class='st'>"EASYPAR_LSF_input_jobarray.csv"</span>,
   <span class='kw'>R_script</span> <span class='kw'>=</span> <span class='st'>"EASYPAR_LSF_Run.R"</span>,
   <span class='kw'>Submission_script</span> <span class='kw'>=</span> <span class='st'>"EASYPAR_LSF_submission.sh"</span>, <span class='kw'>output_folder</span> <span class='kw'>=</span> <span class='st'>"."</span>,
@@ -187,8 +187,13 @@ Otherwise, default values will prompt errors submitting the job.</p></td>
     <tr>
       <th>modules</th>
       <td><p>A list of modules that will be added as dependencies of the
-LSF submission script. For instance <code>modules = 'R/3.4.0'</code> will generate
-the dependecy for a specific R version as <code>"module load R/3.4.0"</code>.</p></td>
+LSF submission script. For instance <code>modules = 'R/3.5.0'</code> will generate
+the dependecy for a specific R version as <code>"module load R/3.5.0"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>extra_commands</th>
+      <td><p>Extra set of commands that will be executed in the submission
+script right after modules declaration.</p></td>
     </tr>
     <tr>
       <th>input_file</th>
@@ -244,7 +249,7 @@ default parameters for LSF jobs.</p></div>
 <span class='no'>PARAMS</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>25</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>25</span>))
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># vcall - not run - as it's cluster-specific</span>
+<span class='co'># call - not run since it's cluster-specific</span>
 <span class='fu'>run_lsf</span>(<span class='no'>FUN</span>, <span class='no'>PARAMS</span>)
 }</div></pre>
   </div>

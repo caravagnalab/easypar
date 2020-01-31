@@ -132,7 +132,7 @@ used by function run_lsf." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Deafult BSUB setting to submit array jobs to LSF clusters.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/caravagn/easypar/blob/master/R/lsf.R'><code>R/lsf.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/easypar/blob/master/R/default_BSUB_config.R'><code>R/default_BSUB_config.R</code></a></small>
     <div class="hidden name"><code>default_BSUB_config.Rd</code></div>
     </div>
 
@@ -145,7 +145,7 @@ used by function <code>run_lsf</code>.</p>
 
     <pre class="usage"><span class='fu'>default_BSUB_config</span>(<span class='kw'>J</span> <span class='kw'>=</span> <span class='st'>"EASYPAR_Runner"</span>, <span class='kw'>P</span> <span class='kw'>=</span> <span class='st'>"dummy_project"</span>,
   <span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"short"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='st'>"\"span[hosts=1]\""</span>, <span class='kw'>W</span> <span class='kw'>=</span> <span class='st'>"4:00"</span>,
-  <span class='kw'>o</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>J</span>, <span class='st'>"/output.%J.%I"</span>), <span class='kw'>e</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>J</span>, <span class='st'>"/errors.%J.%I"</span>))</pre>
+  <span class='kw'>o</span> <span class='kw'>=</span> <span class='st'>"log/output.%J.%I"</span>, <span class='kw'>e</span> <span class='kw'>=</span> <span class='st'>"log/errors.%J.%I"</span>)</pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>

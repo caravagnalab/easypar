@@ -81,7 +81,7 @@ FUN = function(x, y){ print(x, y) }
 PARAMS = data.frame(x = runif(25), y = runif(25))
 
 \dontrun{
-# vcall - not run - as it's cluster-specific
+# call - not run since it's cluster-specific
 run_lsf(FUN, PARAMS)
 }
 }

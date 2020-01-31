@@ -1,12 +1,48 @@
+#' Inspects the logs of an LSF array job.
+#' 
+#' @description 
+#' 
+#' If your an array job generated through `easypar`'s function \code{run_lsf},
+#' you can use this function to inspect the logs. The functions takes a process
+#' identifier (PID), and then scans logs in a folder selecting those
+#' belonging to the array jobs run with that PID. For every output file, the
+#' standard LSF closing text \code{"Successfully completed."} is searched for.
+#' If it is not found the relative error file is scanned to find the error message
+#' (grepping an \code{"Error"} term in the file), and displayed to screen. Log
+#' files for jobs run succesfully are compressed into a zip file stored in the log
+#' folders, and error logs are retained. The list of input(s) that are
+#' associated with error logs is also print to screen, and a summary table is retuned.
+#'
+#' @param PID Process identier, it should appear in the names of the logfiles.
+#' @param errors_folder A folder with logs to inspect.
+#' @param input_file The input file associated to the job, if not \code{NULL} the
+#' inputs for the runs with error are shown to screen.
+#' 
+#' @seealso \code{\link{run_lsf}}
+#'
+#' @return A tibble with the name of the jobs analysed, file
+#' references and output status.
+#' 
+#' @export
+#'
+#' @examples
 #' # very dummy example function
-# FUN = function(x, y){ if(runif(1) > .7) stop("Atrocious") else print(x, y) }
-# PARAMS = data.frame(x = runif(25), y = runif(25))
-# run_lsf(FUN, PARAMS)
-# errors_folder = "/Users/gcaravagna/Documents/Davros/Hartwig_analysis/log_deconvolution"
-# PID = '61424'
-# BSUB_config = easypar::default_BSUB_config()
-# logs_inspector(BSUB_config, PID, errors_folder)
-logs_inspector = function(BSUB_config, PID, errors_folder, input_file)
+#' FUN = function(x, y){ print(x, y) }
+#' 
+#' # input for 25 array jobs
+#' PARAMS = data.frame(x = runif(25), y = runif(25))
+#' 
+#' \dontrun{
+#' # not run 
+#' run_lsf(FUN, PARAMS)
+#' 
+#' # Once logs are produced... we can inspect them
+#'  
+#' # inspect using default params (as in job submission)
+#' lsf_logs_inspector(PID = 1234, errors_folder = 'log', input_file = 'EASYPAR_LSF_input_jobarray.csv')
+#' }
+#' 
+lsf_logs_inspector = function(PID, errors_folder, input_file, delete_files = TRUE)
 {
   log_files = list.files(path = errors_folder, full.names = TRUE)
   log_files = log_files[grepl(log_files, pattern = PID)]
@@ -94,7 +130,39 @@ logs_inspector = function(BSUB_config, PID, errors_folder, input_file)
            })
     }
     
-  invisible(clean_up_lsf_logs(table_logs, errors_folder, PID))
+  invisible(clean_up_lsf_logs(table_logs, errors_folder, PID, delete_files))
+  
+  # Report failed inputs
+  if(!all(is.null(input_file)))
+  {
+    all_inp = read.csv(input_file, stringsAsFactors = FALSE)
+  
+    ids_notok_runs = table_logs %>% 
+      dplyr::filter(exit_status) %>%
+      pull(input_id)
+    
+    if(length(ids_notok_runs) > 0)
+    {
+      label = apply(
+        all_inp[ids_notok_runs, , drop = FALSE],
+        1, 
+        paste, collapse = ' ')
+      
+      cli::cli_h2("Inputs for runs that generated errors")
+      
+      cat(
+        cli::boxx(
+        col_white(label),
+        # border_style="round",
+        padding = 3,
+        float = "center",
+        border_col = "black",
+        background_col="darkolivegreen"
+      ))
+    }
+  }
+  
+  return(table_logs)
 }
 
 scan_logfile = function(f)
@@ -155,7 +223,7 @@ scan_errfile = function(f)
 #   message("Submission did not go fantastic..")
 # }
 
-clean_up_lsf_logs = function(table_logs, errors_folder, PID)
+clean_up_lsf_logs = function(table_logs, errors_folder, PID, delete_files)
 {
   # Cases OK and NOT OK
   OK = table_logs %>% 
@@ -178,13 +246,13 @@ clean_up_lsf_logs = function(table_logs, errors_folder, PID)
 
   cli::cli_process_start(paste0("Compressing n = {.value {nrow(OK)}} OK logs to: {.field {out_tar}}, cancelling original log files afterwards."))
   
-  capture.output(zip(out_tar,files = OK %>% unlist))
+  w = capture.output({zip(out_tar,files = OK %>% unlist)})
   
   cli::cli_alert(paste0("Zip file created: ", utils:::format.object_size(file.info(out_tar)$size, "auto")))
   
-  # Remove the files  OK
-  w = sapply(OK %>% unlist, file.remove)
-  # 
+  # Remove the filesOK
+  if(delete_files) w = sapply(OK %>% unlist, file.remove)
+  
   out_fold = paste0(errors_folder, '/ok_logs')
   cli::cli_process_done()
   
