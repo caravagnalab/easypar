@@ -152,7 +152,7 @@ lsf_logs_inspector = function(PID, errors_folder, input_file, delete_files = TRU
       
       cat(
         cli::boxx(
-        col_white(label),
+        cli::col_white(label),
         # border_style="round",
         padding = 3,
         float = "center",
