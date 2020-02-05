@@ -124,7 +124,10 @@ lsf_logs_inspector = function(PID, errors_folder, input_file, delete_files = TRU
            function(x)
             {
              cat('\n')
-             cli::rule(left = paste0("Error log from job id: ", crayon::red(errors$input_id[x])), right = paste0(errors$err_file[x]), line = 2) %>% cat
+             cli::rule(
+               left = paste0("Error log from job id: ", crayon::red(errors$input_id[x])), 
+               right = paste0(errors$err_file[x]), line = 2) %>% cat
+             cat("\n")
              cat(error_jobs[x])
              cat("\n")
            })
@@ -138,7 +141,7 @@ lsf_logs_inspector = function(PID, errors_folder, input_file, delete_files = TRU
     all_inp = read.csv(input_file, stringsAsFactors = FALSE)
   
     ids_notok_runs = table_logs %>% 
-      dplyr::filter(exit_status) %>%
+      dplyr::filter(!exit_status) %>%
       pull(input_id)
     
     if(length(ids_notok_runs) > 0)
