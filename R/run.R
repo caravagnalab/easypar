@@ -234,8 +234,9 @@ run = function(FUN,
       .errorhandling = 'pass'
     ) %dopar%
       {
-        # run, and cache if required
+        # run, and cache if required, after Garbage Collection
         r = do.call(FUN, PARAMS[[i]])
+        gc()
 
         cacheit(r, cache, i)
         r
