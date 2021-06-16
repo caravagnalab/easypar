@@ -204,7 +204,7 @@ run = function(FUN,
       error = function(e)
       {
         # Intercepted error
-        message('[easypar] run ', i, ' - ',  e)
+        if(!silent) message('[easypar] run ', i, ' - ',  e)
       }
       )
       
