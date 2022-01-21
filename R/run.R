@@ -23,6 +23,7 @@
 #' @import parallel
 #' @import foreach
 #' @import dplyr
+#' @import progress
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #'
 #'
@@ -186,11 +187,21 @@ run = function(FUN,
     # With a progressbar
     pb = NULL
     if (progress_bar)
-      pb <- dplyr::progress_estimated(n = N, min_time = 2)
+      # pb <- dplyr::progress_estimated(n = N, min_time = 2)
+      pb = progress::progress_bar$new(
+        format = paste0(" \u25A3 :spin [:bar] :percent [ETA :eta] \u25B6 :elapsedfull"),
+        total = N, 
+        clear = TRUE, 
+        complete = '~',
+        incomplete = " ",
+        current = ">",
+        width= 90)
     
+      
     for (i in 1:N)
     {
-      if (progress_bar) pb$tick()$print()
+      if (progress_bar) pb$tick()
+
       
       # r = errorCondition("FUN raised error.")
       r = simpleError("FUN raised error.")
