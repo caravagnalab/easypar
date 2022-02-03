@@ -4,7 +4,7 @@
 \alias{lsf_logs_inspector}
 \title{Inspects the logs of an LSF array job.}
 \usage{
-lsf_logs_inspector(PID, errors_folder, input_file)
+lsf_logs_inspector(PID, errors_folder, input_file, delete_files = TRUE)
 }
 \arguments{
 \item{PID}{Process identier, it should appear in the names of the logfiles.}
