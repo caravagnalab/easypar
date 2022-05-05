@@ -8,7 +8,7 @@
 #' the input function is wrapped inside an automatically generated R
 #' script that gathers inputs from the command line. A SLURM submission
 #' script is generated for a bash shell. The function can also run the
-#' SLURM command `SBATCH` to submit the job, or just generate the required 
+#' SLURM command `sbatch` to submit the job, or just generate the required 
 #' files and prompt the user to submit the job via the shell. SLURM parameters
 #' can be provided as a list of parameters, similarly modules and custom
 #' filenames for the generated scripts.
@@ -189,7 +189,7 @@ run_SLURM = function(FUN,
                                 SBATCH = paste0("#SBATCH ", x, ' ', SBATCH_config[[x]])
                                 
                                 if (x == '--array')
-                                  SBATCH = paste0(SBATCH, '1-', nrow(PARAMS) - 1, N_simultaneous_jobs)
+                                  SBATCH = paste0(SBATCH, '1-', ceiling(nrow(PARAMS)/per_task), N_simultaneous_jobs)
                                 
                                 paste0(SBATCH, '\n')
                               })
@@ -342,9 +342,9 @@ run_SLURM = function(FUN,
     cat('\n')
     
     # message("\nScripts generated, submit your job with the following shell command.\n")
-    # cat(paste0('SBATCH < ', Submission_script), '\n')
+    # cat(paste0('sbatch < ', Submission_script), '\n')
     
-    cli::cat_line(paste0(crayon::yellow('Job submission:'),  ' SBATCH < ', Submission_script))
+    cli::cat_line(paste0(crayon::yellow('Job submission:'),  ' sbatch < ', Submission_script))
     cli::cat_line(paste0(crayon::yellow('   Job testing:'),  ' Rscript ', 
                          R_script, ' ', paste0(PARAMS[1, ], collapse = ' ')))
     
