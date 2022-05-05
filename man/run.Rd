@@ -4,9 +4,19 @@
 \alias{run}
 \title{Run a function with easypar}
 \usage{
-run(FUN, PARAMS, packages = NULL, export = NULL, cores.ratio = 0.8,
-  parallel = TRUE, silent = TRUE, outfile = "", cache = NULL,
-  progress_bar = TRUE, filter_errors = TRUE)
+run(
+  FUN,
+  PARAMS,
+  packages = NULL,
+  export = NULL,
+  cores.ratio = 0.8,
+  parallel = TRUE,
+  silent = TRUE,
+  outfile = "",
+  cache = NULL,
+  progress_bar = TRUE,
+  filter_errors = TRUE
+)
 }
 \arguments{
 \item{FUN}{R function to run}

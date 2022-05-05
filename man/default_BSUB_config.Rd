@@ -4,9 +4,16 @@
 \alias{default_BSUB_config}
 \title{Deafult BSUB setting to submit array jobs to LSF clusters.}
 \usage{
-default_BSUB_config(J = "EASYPAR_Runner", P = "dummy_project",
-  q = "short", n = 1, R = "\\"span[hosts=1]\\"", W = "4:00",
-  o = "log/output.\%J.\%I", e = "log/errors.\%J.\%I")
+default_BSUB_config(
+  J = "EASYPAR_Runner",
+  P = "dummy_project",
+  q = "short",
+  n = 1,
+  R = "\\"span[hosts=1]\\"",
+  W = "4:00",
+  o = "log/output.\%J.\%I",
+  e = "log/errors.\%J.\%I"
+)
 }
 \value{
 A named list of BSUB settings.

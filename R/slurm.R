@@ -230,7 +230,6 @@ run_SLURM = function(FUN,
     paste0(
       'file_input=',input_file, '\n',
       'R_script=',R_script, '\n',
-      'line=$LSB_JOBINDEX\n',
       '\n',
       'PER_TASK=',per_task,'\n',
       'START_NUM=$(( ($SLURM_ARRAY_TASK_ID - 1) * $PER_TASK + 1 ))', '\n',
@@ -244,7 +243,7 @@ run_SLURM = function(FUN,
     function(v)
     {
       paste0('\t',
-        variables[v], "=$( awk -v line=$line 'BEGIN {FS=\"\\t\"}; FNR==line ",
+        variables[v], "=$( awk -v line=$run 'BEGIN {FS=\"\\t\"}; FNR==line ",
         "{print $", v, "}' ",
         "$file_input)\n"
       )
