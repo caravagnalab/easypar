@@ -23,7 +23,12 @@
 #' @import parallel
 #' @import foreach
 #' @import dplyr
+#' @import cli
 #' @import progress
+#' @import crayon
+#' @import readr
+#' @import tibble
+#' @import crayon
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #'
 #'

@@ -1,6 +1,6 @@
 Package: easypar
 Type: Package
-Title: Easy parallaleization of R functions
+Title: Easy parallaleization of R functions.
 Version: 1.0.0
 Author: Giulio Caravagna
 Maintainer: Giulio Caravagna <gcaravagn@gmail.com>
@@ -19,13 +19,17 @@ Imports:
   doParallel,
   parallel,
   foreach,
-  dplyr
+  dplyr,
+  progress,
+  cli,
+  tibble,
+  crayon
 RoxygenNote: 7.1.2
 Suggests: 
     covr,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/caravagn/easypar,
+URL: 
     https://caravagnalab.github.io/easypar/
-BugReports: https://github.com/caravagn/easypar/issues
+BugReports: https://github.com/caravagnalab/easypar/issues

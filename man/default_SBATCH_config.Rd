@@ -6,11 +6,11 @@
 \usage{
 default_SBATCH_config(
   job = "EASYPAR_Runner",
-  partition = "cpu",
+  partition = "cpuq",
   n = 1,
   cpus = 16,
   A = "",
-  time = "4:00",
+  time = "3:00:00",
   o = "log/output.\%A-\%a.log",
   mem = "1040M"
 )

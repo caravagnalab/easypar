@@ -69,7 +69,7 @@ this function is expecting. The input data.frame is dumped to a file,
 the input function is wrapped inside an automatically generated R
 script that gathers inputs from the command line. A SLURM submission
 script is generated for a bash shell. The function can also run the
-SLURM command `SBATCH` to submit the job, or just generate the required 
+SLURM command `sbatch` to submit the job, or just generate the required 
 files and prompt the user to submit the job via the shell. SLURM parameters
 can be provided as a list of parameters, similarly modules and custom
 filenames for the generated scripts.
