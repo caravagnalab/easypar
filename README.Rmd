@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/caravagn/easypar/workflows/R-CMD-check/badge.svg)](https://github.com/caravagn/easypar/actions)
+[![R-CMD-check](https://github.com/caravagn/easypar/workflows/pkgdown/badge.svg)](https://github.com/caravagn/easypar/actions)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 

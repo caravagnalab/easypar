@@ -1,14 +1,12 @@
 
-# easypar <a href='https://caravagn.github.io/easypar'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# easypar <a href="https://caravagnalab.github.io/easypar/"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/caravagn/easypar.svg?branch=master)](https://travis-ci.org/caravagn/easypar)
-[![Github All
-Releases](https://img.shields.io/github/downloads/caravagn/easypar/total.svg)]()
+[![R-CMD-check](https://github.com/caravagn/easypar/workflows/R-CMD-check/badge.svg)](https://github.com/caravagn/easypar/actions)
+[![R-CMD-check](https://github.com/caravagn/easypar/workflows/pkgdown/badge.svg)](https://github.com/caravagn/easypar/actions)
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 `easypar` makes it easy to implement parallel computations in R. If youo
