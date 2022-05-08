@@ -12,7 +12,7 @@ Description: The easypar package makes it easy to implement parallel computation
   of code, offering a soilution based on the foreach and doParallel
   paradigms for parallel computing, or generating array jobs for the popular LSF 
   workload for distributed high performance computing.  
-License: file LICENSE
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -21,8 +21,11 @@ Imports:
   foreach,
   dplyr
 RoxygenNote: 7.1.2
-Suggests: knitr,
+Suggests: 
+    covr,
+    knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/caravagn/easypar
+URL: https://github.com/caravagn/easypar,
+    https://caravagnalab.github.io/easypar/
 BugReports: https://github.com/caravagn/easypar/issues

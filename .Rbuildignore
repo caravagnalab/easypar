@@ -7,3 +7,9 @@
 ^.git/.*$
 ^doc$
 ^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^LICENSE\.md$
+^codecov\.yml$
