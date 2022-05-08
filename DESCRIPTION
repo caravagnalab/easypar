@@ -1,7 +1,7 @@
 Package: easypar
 Type: Package
 Title: Easy parallaleization of R functions
-Version: 0.2.0
+Version: 1.0.0
 Author: Giulio Caravagna
 Maintainer: Giulio Caravagna <gcaravagn@gmail.com>
 Authors@R: person("Giulio", "Caravagna", role = c("aut", "cre"), email = "gcaravagn@gmail.com")
