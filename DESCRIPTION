@@ -21,20 +21,22 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Imports: 
-  doParallel,
-  parallel,
-  foreach,
-  dplyr,
-  progress,
-  cli,
-  tibble,
-  crayon
+    doParallel,
+    parallel,
+    foreach,
+    dplyr,
+    progress,
+    cli,
+    tibble,
+    crayon,
+    readr,
+    markdown,
+    prettydoc
 RoxygenNote: 7.1.2
 Suggests: 
     covr,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: 
-    https://caravagnalab.github.io/easypar/
+URL: https://caravagnalab.github.io/easypar/
 BugReports: https://github.com/caravagnalab/easypar/issues
