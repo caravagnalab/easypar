@@ -19,13 +19,13 @@ default_SBATCH_config(
 A named list of SBATCH settings.
 }
 \description{
-Deafult SBATCH setting to submit array jobs to 
+Deafult SBATCH setting to submit array jobs to
 LSF clusters. This is handy to obtain a default input, and
 implement custom modificiations. These parameters are to be
 used by function \code{run_slurm}.
 }
 \examples{
-custom_SBATCH = default_SBATCH_config(W = '12:00')
+custom_SBATCH = default_SBATCH_config(time = '12:00')
 custom_SBATCH$`-nodes` = 10
 custom_SBATCH$`--partition` = "my_queue"
 }

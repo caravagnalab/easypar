@@ -28,13 +28,13 @@ Imports:
   progress,
   cli,
   tibble,
-  crayon
+  crayon,
+  readr
 RoxygenNote: 7.1.2
 Suggests: 
     covr,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: 
-    https://caravagnalab.github.io/easypar/
+URL: https://caravagnalab.github.io/easypar/
 BugReports: https://github.com/caravagnalab/easypar/issues
