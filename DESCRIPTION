@@ -21,15 +21,16 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Imports: 
-  doParallel,
-  parallel,
-  foreach,
-  dplyr,
-  progress,
-  cli,
-  tibble,
-  crayon,
-  readr
+    doParallel,
+    parallel,
+    foreach,
+    dplyr,
+    progress,
+    cli,
+    tibble,
+    crayon,
+    readr,
+    markdown
 RoxygenNote: 7.1.2
 Suggests: 
     covr,
