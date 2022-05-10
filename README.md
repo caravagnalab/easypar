@@ -22,7 +22,7 @@ through parallelism is a trivial task.
 
 #### Help and support
 
-[![](https://img.shields.io/badge/GitHub%20Pages-https://caravagn.github.io/easypar/-yellow.svg)](https://caravagn.github.io/easypar)
+[![](https://img.shields.io/badge/GitHub%20Pages-https://caravagnalab.github.io/easypar/-yellow.svg)](https://caravagnalab.github.io/easypar)
 
 ------------------------------------------------------------------------
 
@@ -30,14 +30,14 @@ through parallelism is a trivial task.
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("caravagn/easypar")
+devtools::install_github("caravagnalab/easypar")
 ```
 
 ------------------------------------------------------------------------
 
 #### Copyright and contacts
 
-Giulio Caravagna. Cancer Data Science (CDS) Laboratory.
+Cancer Data Science (CDS) Laboratory, University of Trieste, Italy.
 
 [![](https://img.shields.io/badge/CDS%20Lab%20Github-caravagnalab-seagreen.svg)](https://github.com/caravagnalab)
 [![](https://img.shields.io/badge/CDS%20Lab%20webpage-https://www.caravagnalab.org/-red.svg)](https://www.caravagnalab.org/)
