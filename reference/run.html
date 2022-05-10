@@ -125,7 +125,7 @@ execution modes for this task.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Default run: parallel, silent, output to screen</span></span>
 <span class="r-in"><span class="fu">run</span><span class="op">(</span><span class="va">dummy_fun</span>, <span class="va">dummy_params</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding parallel execution setup [TRUE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding parallel execution setup [TRUE] with global option : FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -144,7 +144,7 @@ execution modes for this task.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Run serially with progress_bar</span></span>
 <span class="r-in"><span class="fu">run</span><span class="op">(</span><span class="va">dummy_fun</span>, <span class="va">dummy_params</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding parallel execution setup [FALSE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding parallel execution setup [FALSE] with global option : FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -162,7 +162,7 @@ execution modes for this task.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="co"># Run serially without progress_bar</span></span>
 <span class="r-in"><span class="fu">run</span><span class="op">(</span><span class="va">dummy_fun</span>, <span class="va">dummy_params</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span>, progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding parallel execution setup [FALSE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding parallel execution setup [FALSE] with global option : FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -181,10 +181,10 @@ execution modes for this task.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Run parallel, not silent, caching the results</span></span>
 <span class="r-in"><span class="fu">run</span><span class="op">(</span><span class="va">dummy_fun</span>, <span class="va">dummy_params</span>, silent <span class="op">=</span> <span class="cn">FALSE</span>, cache <span class="op">=</span> <span class="st">"MyCache.rds"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding parallel execution setup [TRUE] with global option : FALSE</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Computing 5 tasks.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Caching outputs to : /tmp/RtmpHAJpxG/file30e566db421e/reference/MyCache.rds</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Running sequentially.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding parallel execution setup [TRUE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Computing 5 tasks.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Caching outputs to : /tmp/RtmpjFvlOe/file30ec76afd277/reference/MyCache.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Running sequentially.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -206,7 +206,7 @@ execution modes for this task.</p>
 <span class="r-in"><span class="co"># Overwriting default setting with global options</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>easypar.parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">run</span><span class="op">(</span><span class="va">dummy_fun</span>, <span class="va">dummy_params</span><span class="op">)</span> <span class="co"># Will run sequentially</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding parallel execution setup [TRUE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding parallel execution setup [TRUE] with global option : FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -225,8 +225,8 @@ execution modes for this task.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>easypar.progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Will hide the progress bar</span></span>
 <span class="r-in"><span class="fu">run</span><span class="op">(</span><span class="va">dummy_fun</span>, <span class="va">dummy_params</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding parallel execution setup [TRUE] with global option : FALSE</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding progress bar setup [TRUE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding parallel execution setup [TRUE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding progress bar setup [TRUE] with global option : FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -258,8 +258,8 @@ execution modes for this task.</p>
 <span class="r-in">  silent <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span class="r-in">  filter_errors <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding parallel execution setup [TRUE] with global option : TRUE</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:48 - Overriding progress bar setup [TRUE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding parallel execution setup [TRUE] with global option : TRUE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:52 - Overriding progress bar setup [TRUE] with global option : FALSE</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Getters that can return the number of errors</span></span>
 <span class="r-in"><span class="co"># and filter them out</span></span>
@@ -274,8 +274,8 @@ execution modes for this task.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`2`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`5`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`3`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">#' Can do this automatically with filter_errors = TRUE</span></span>
@@ -288,8 +288,8 @@ execution modes for this task.</p>
 <span class="r-in">  silent <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span class="r-in">  filter_errors <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:49 - Overriding parallel execution setup [TRUE] with global option : TRUE</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:46:49 - Overriding progress bar setup [TRUE] with global option : FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:53 - Overriding parallel execution setup [TRUE] with global option : TRUE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2022-05-10 23:52:53 - Overriding progress bar setup [TRUE] with global option : FALSE</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> [easypar] 2/5 computations returned errors and will be removed.</span>
 </code></pre></div>
     </div>
