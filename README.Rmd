@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/caravagn/easypar/workflows/R-CMD-check/badge.svg)](https://github.com/caravagn/easypar/actions)
 [![R-CMD-check](https://github.com/caravagn/easypar/workflows/pkgdown/badge.svg)](https://github.com/caravagn/easypar/actions)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-CMD-check](https://github.com/caravagnalab/easypar/workflows/R-CMD-check/badge.svg)](https://github.com/caravagnalab/easypar/actions)
 <!-- badges: end -->
 
 `easypar` makes it easy to implement parallel computations in R. If youo have a function that 
