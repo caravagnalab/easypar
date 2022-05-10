@@ -4,7 +4,12 @@ Title: Easy parallaleization of R functions.
 Version: 1.0.0
 Author: Giulio Caravagna
 Maintainer: Giulio Caravagna <gcaravagn@gmail.com>
-Authors@R: person("Giulio", "Caravagna", role = c("aut", "cre"), email = "gcaravagn@gmail.com")
+Authors@R: c(
+    person("Giulio", "Caravagna", , "gcaravagn@gmail.com", role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0003-4240-3265")
+    ),
+    person("Salvatore", "Milite", role=c("ctb"), email="militesalvatore@gmail.com")
+    )
 Description: The easypar package makes it easy to implement parallel computations in R.
   To use this package, you need to have a function that 
   carries out your desired computation. easypar will take care of the

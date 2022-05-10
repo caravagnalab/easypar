@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="easypar">
 <title>LSF array jobs with easypar • easypar</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -12,114 +13,105 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="LSF array jobs with easypar">
-<meta property="og:description" content="">
-<meta property="og:image" content="/logo.png">
-<meta name="twitter:card" content="summary">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="LSF array jobs with easypar">
+<meta property="og:description" content="easypar">
+<meta property="og:image" content="https://caravagnalab.github.io/easypar/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">easypar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
-      </span>
-    </div>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">easypar</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../articles/easypar.html">Get started</a>
 </li>
-<li>
-  <a href="../articles/easypar.html">Get started</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/lsf.html">LSF array jobs with easypar</a>
+  </div>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/lsf.html">LSF array jobs with easypar</a>
-    </li>
-  </ul>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/caravagn/easypar">
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/caravagnalab/easypar/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1>LSF array jobs with easypar</h1>
-                        <h4 class="author">Giulio Caravagna</h4>
+
+
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>LSF array jobs with easypar</h1>
+                        <h4 data-toc-skip class="author">Giulio Caravagna</h4>
             
-            <h4 class="date">15 September 2019</h4>
+            <h4 data-toc-skip class="date">15 September 2019</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/caravagn/easypar/blob/master/vignettes/lsf.Rmd"><code>vignettes/lsf.Rmd</code></a></small>
-      <div class="hidden name"><code>lsf.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/caravagnalab/easypar/blob/HEAD/vignettes/lsf.Rmd" class="external-link"><code>vignettes/lsf.Rmd</code></a></small>
+      <div class="d-none name"><code>lsf.Rmd</code></div>
     </div>
 
     
     
 <p><code>easypar</code> can be used to generate scripts that submit array jobs to the LSF cluster system.</p>
 <p>First, write in R your code.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Computation function </span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">FUN =<span class="st"> </span><span class="cf">function</span>(x, y){  ... }</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Input for 25 array jobs that match FUN arguments</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">PARAMS =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>))</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co"># Generates submission files </span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="../reference/run_lsf.html">run_lsf</a></span>(FUN, PARAMS)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Computation function </span>
+<span class="va">FUN</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">{</span>  <span class="va">...</span> <span class="op">}</span>
+
+<span class="co"># Input for 25 array jobs that match FUN arguments</span>
+<span class="va">PARAMS</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Generates submission files </span>
+<span class="fu"><a href="../reference/run_lsf.html">run_lsf</a></span><span class="op">(</span><span class="va">FUN</span>, <span class="va">PARAMS</span><span class="op">)</span></code></pre></div>
 <p>Then, in your terminal.</p>
 <pre class="{"><code># Test if the generated script runs with the first input 
 head -1 EASYPAR_LSF_input_jobarray.csv | Rscript EASYPAR_LSF_Run.R
 
 # Submit array jobs (after loading the cluster module)
 bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
-<div id="requirements" class="section level4">
-<h4 class="hasAnchor">
-<a href="#requirements" class="anchor"></a>Requirements</h4>
+<div class="section level4">
+<h4 id="requirements">Requirements<a class="anchor" aria-label="anchor" href="#requirements"></a>
+</h4>
 <!-- To use  `run_lsf` you need: -->
 <ul>
 <li>a function <code>FUN</code> (e.g.,: <code>FUN = ls</code>) that can run as a stand-alone R application, with its own parameters and that manages explicitly its dependencies.</li>
@@ -130,12 +122,12 @@ bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
 <ul>
 <li>a dataframe <code>PARAMS</code> where every row is an input for <code>FUN</code>. The column order must match <code>FUN</code> arguments.</li>
 </ul>
-<p>Conceptually, you set up the data as for an <code><a href="https://rdrr.io/r/base/apply.html">apply(FUN, MARGIN = 1)</a></code> by row.</p>
+<p>Conceptually, you set up the data as for an <code>apply(FUN, MARGIN = 1)</code> by row.</p>
 <p>The input should have column names without dots or spaces; these will match the arguments of <code>FUN</code>. So, for instance, an input with 2-columns will only work if <code>FUN</code> has 2 parameters.</p>
 </div>
-<div id="output" class="section level4">
-<h4 class="hasAnchor">
-<a href="#output" class="anchor"></a>Output</h4>
+<div class="section level4">
+<h4 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
+</h4>
 <p><code>run_lsf</code> generates 3 files:</p>
 <ul>
 <li><p>an R script wrapping the definition of <code>FUN</code>, with extra code to call <code>FUN</code> using parameters from the command line. Your function in this script is called with a fake name;</p></li>
@@ -144,9 +136,9 @@ bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
 </ul>
 <p>Before submitting the job, test the computation as explained above.</p>
 </div>
-<div id="customising-jobs" class="section level4">
-<h4 class="hasAnchor">
-<a href="#customising-jobs" class="anchor"></a>Customising jobs</h4>
+<div class="section level4">
+<h4 id="customising-jobs">Customising jobs<a class="anchor" aria-label="anchor" href="#customising-jobs"></a>
+</h4>
 <p>Cluster-specific BSUB instructions can be specified, as well as other dependencies from modules available on the cluster.</p>
 <p>Function <code>run_lsf</code> allows to:</p>
 <ul>
@@ -154,33 +146,36 @@ bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
 <li><p>customize the BSUB parameters of the generated script.</p></li>
 </ul>
 <p>The package comes with a default BSUB configuration, that <strong>has to be updated according to your cluster setup</strong>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(easypar)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># Default parameters in the package</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>()</a></code></pre></div>
-<pre><code>## $`-J`
-## [1] "EASYPAR_Runner"
-## 
-## $`-P`
-## [1] "dummy_project"
-## 
-## $`-q`
-## [1] "short"
-## 
-## $`-n`
-## [1] 1
-## 
-## $`-R`
-## [1] "\"span[hosts=1]\""
-## 
-## $`-W`
-## [1] "4:00"
-## 
-## $`-o`
-## [1] "log/output.%J.%I"
-## 
-## $`-e`
-## [1] "log/errors.%J.%I"</code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caravagnalab.github.io/easypar/">easypar</a></span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Warning: replacing previous import 'cli::num_ansi_colors' by</span>
+<span class="co">## 'crayon::num_ansi_colors' when loading 'easypar'</span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Default parameters in the package</span>
+<span class="fu"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## $`-J`</span>
+<span class="co">## [1] "EASYPAR_Runner"</span>
+<span class="co">## </span>
+<span class="co">## $`-P`</span>
+<span class="co">## [1] "dummy_project"</span>
+<span class="co">## </span>
+<span class="co">## $`-q`</span>
+<span class="co">## [1] "short"</span>
+<span class="co">## </span>
+<span class="co">## $`-n`</span>
+<span class="co">## [1] 1</span>
+<span class="co">## </span>
+<span class="co">## $`-R`</span>
+<span class="co">## [1] "\"span[hosts=1]\""</span>
+<span class="co">## </span>
+<span class="co">## $`-W`</span>
+<span class="co">## [1] "4:00"</span>
+<span class="co">## </span>
+<span class="co">## $`-o`</span>
+<span class="co">## [1] "log/output.%J.%I"</span>
+<span class="co">## </span>
+<span class="co">## $`-e`</span>
+<span class="co">## [1] "log/errors.%J.%I"</span></code></pre>
 <p>These are classical BSUB parameters:</p>
 <ul>
 <li>
@@ -200,68 +195,70 @@ bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
 <p>It is required to modify the default values of <code>-P</code> and <code>-q</code>, the project and queue ID, according to your LSF configuration. Otherwise, the submission script will generate an error becaue the default values do not mean anything.</p>
 </blockquote>
 <p>Modifications are done to the default list of parameters; other BSUB flags can be used as well. No checkings on their correctness are done by <code>easypar</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">custom_BSUB =<span class="st"> </span><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>()</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># More informative job ID</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-J</span><span class="st">`</span> =<span class="st"> "bwa_aligner"</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># A token for a project allowed to run on the cluster</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-P</span><span class="st">`</span> =<span class="st"> "DKSMWOP331"</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co"># A queue name that is valid on the cluster</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">custom_BSUB<span class="op">$</span><span class="st">`</span><span class="dt">-q</span><span class="st">`</span> =<span class="st"> "bioinformatics"</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(custom_BSUB)</a></code></pre></div>
-<pre><code>## $`-J`
-## [1] "bwa_aligner"
-## 
-## $`-P`
-## [1] "DKSMWOP331"
-## 
-## $`-q`
-## [1] "bioinformatics"
-## 
-## $`-n`
-## [1] 1
-## 
-## $`-R`
-## [1] "\"span[hosts=1]\""
-## 
-## $`-W`
-## [1] "4:00"
-## 
-## $`-o`
-## [1] "log/output.%J.%I"
-## 
-## $`-e`
-## [1] "log/errors.%J.%I"</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Shorter version</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">custom_BSUB =<span class="st"> </span><span class="kw"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span>(<span class="dt">J =</span> <span class="st">'bwa_aligner'</span>, <span class="dt">P =</span> <span class="st">'DKSMWOP331'</span>, <span class="dt">q =</span> <span class="st">'bioinformatics'</span>)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(custom_BSUB)</a></code></pre></div>
-<pre><code>## $`-J`
-## [1] "bwa_aligner"
-## 
-## $`-P`
-## [1] "DKSMWOP331"
-## 
-## $`-q`
-## [1] "bioinformatics"
-## 
-## $`-n`
-## [1] 1
-## 
-## $`-R`
-## [1] "\"span[hosts=1]\""
-## 
-## $`-W`
-## [1] "4:00"
-## 
-## $`-o`
-## [1] "log/output.%J.%I"
-## 
-## $`-e`
-## [1] "log/errors.%J.%I"</code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">custom_BSUB</span> <span class="op">=</span> <span class="fu"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># More informative job ID</span>
+<span class="va">custom_BSUB</span><span class="op">$</span><span class="va">`-J`</span> <span class="op">=</span> <span class="st">"bwa_aligner"</span>
+
+<span class="co"># A token for a project allowed to run on the cluster</span>
+<span class="va">custom_BSUB</span><span class="op">$</span><span class="va">`-P`</span> <span class="op">=</span> <span class="st">"DKSMWOP331"</span>
+
+<span class="co"># A queue name that is valid on the cluster</span>
+<span class="va">custom_BSUB</span><span class="op">$</span><span class="va">`-q`</span> <span class="op">=</span> <span class="st">"bioinformatics"</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">custom_BSUB</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## $`-J`</span>
+<span class="co">## [1] "bwa_aligner"</span>
+<span class="co">## </span>
+<span class="co">## $`-P`</span>
+<span class="co">## [1] "DKSMWOP331"</span>
+<span class="co">## </span>
+<span class="co">## $`-q`</span>
+<span class="co">## [1] "bioinformatics"</span>
+<span class="co">## </span>
+<span class="co">## $`-n`</span>
+<span class="co">## [1] 1</span>
+<span class="co">## </span>
+<span class="co">## $`-R`</span>
+<span class="co">## [1] "\"span[hosts=1]\""</span>
+<span class="co">## </span>
+<span class="co">## $`-W`</span>
+<span class="co">## [1] "4:00"</span>
+<span class="co">## </span>
+<span class="co">## $`-o`</span>
+<span class="co">## [1] "log/output.%J.%I"</span>
+<span class="co">## </span>
+<span class="co">## $`-e`</span>
+<span class="co">## [1] "log/errors.%J.%I"</span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Shorter version</span>
+<span class="va">custom_BSUB</span> <span class="op">=</span> <span class="fu"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span><span class="op">(</span>J <span class="op">=</span> <span class="st">'bwa_aligner'</span>, P <span class="op">=</span> <span class="st">'DKSMWOP331'</span>, q <span class="op">=</span> <span class="st">'bioinformatics'</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">custom_BSUB</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## $`-J`</span>
+<span class="co">## [1] "bwa_aligner"</span>
+<span class="co">## </span>
+<span class="co">## $`-P`</span>
+<span class="co">## [1] "DKSMWOP331"</span>
+<span class="co">## </span>
+<span class="co">## $`-q`</span>
+<span class="co">## [1] "bioinformatics"</span>
+<span class="co">## </span>
+<span class="co">## $`-n`</span>
+<span class="co">## [1] 1</span>
+<span class="co">## </span>
+<span class="co">## $`-R`</span>
+<span class="co">## [1] "\"span[hosts=1]\""</span>
+<span class="co">## </span>
+<span class="co">## $`-W`</span>
+<span class="co">## [1] "4:00"</span>
+<span class="co">## </span>
+<span class="co">## $`-o`</span>
+<span class="co">## [1] "log/output.%J.%I"</span>
+<span class="co">## </span>
+<span class="co">## $`-e`</span>
+<span class="co">## [1] "log/errors.%J.%I"</span></code></pre>
 <p>Once the BSUB has been customized, you can either:</p>
 <ul>
 <li>generate the submission scripts, and submit your job manually</li>
@@ -269,96 +266,96 @@ bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
 </ul>
 <p>By default (<code>run = FALSE</code>) the <code>run_lsf</code> function outputs the shell command that should be used to submit the jobs, but leaves the user to submit the job. This is because we experienced some command line issues calling modules with a system call.</p>
 </div>
-<div id="example" class="section level4">
-<h4 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h4>
+<div class="section level4">
+<h4 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h4>
 <p>An example computation follows.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># A simple function that prints some outputs</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">FUN =<span class="st"> </span><span class="cf">function</span>(x, y){ </a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(x, y) </a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co"># input for 25 array jobs</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">PARAMS =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">  <span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>), </a>
-<a class="sourceLine" id="cb9-9" data-line-number="9">  <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">  )</a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co"># generates the input files, adding some module dependencies</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="kw"><a href="../reference/run_lsf.html">run_lsf</a></span>(FUN, </a>
-<a class="sourceLine" id="cb9-14" data-line-number="14">        PARAMS, </a>
-<a class="sourceLine" id="cb9-15" data-line-number="15">        <span class="dt">BSUB_config =</span> custom_BSUB,</a>
-<a class="sourceLine" id="cb9-16" data-line-number="16">        <span class="dt">modules =</span> <span class="st">'R/3.5.0'</span></a>
-<a class="sourceLine" id="cb9-17" data-line-number="17">        )</a></code></pre></div>
-<pre><code>## Destination folder for the LSF scripts and inputs:  . 
-## Creating folder for output and error logs:  log</code></pre>
-<pre><code>## Warning in dir.create(folder[1]): 'log' already exists</code></pre>
-<pre><code>## [easypar]: generated LSF submission script</code></pre>
-<pre><code>## #!/bin/bash
-## 
-## #BSUB -J bwa_aligner[1-25]
-## #BSUB -P DKSMWOP331
-## #BSUB -q bioinformatics
-## #BSUB -n 1
-## #BSUB -R "span[hosts=1]"
-## #BSUB -W 4:00
-## #BSUB -o log/output.%J.%I
-## #BSUB -e log/errors.%J.%I
-## 
-## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=
-## # Automatic LSF script generated via easypar
-## # 2019-11-12 20:22:42
-## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=
-## 
-## # Required modules
-## module load R/3.5.0 
-## 
-## 
-## # Input file and R script
-## file_input=EASYPAR_LSF_input_jobarray.csv
-## R_script=EASYPAR_LSF_Run.R
-## line=$LSB_JOBINDEX
-## 
-## # Data loading
-## x=$( awk -v line=$line 'BEGIN {FS="\t"}; FNR==line {print $1}' $file_input)
-## y=$( awk -v line=$line 'BEGIN {FS="\t"}; FNR==line {print $2}' $file_input)
-## 
-## # Job run
-## Rscript $R_script $x $y</code></pre>
-<pre><code>## [easypar]: generated input file from input data.frame</code></pre>
-<pre><code>## [easypar]: generated R script from input function</code></pre>
-<pre><code>## 
-## Scripts generated, submit your job with the following shell command.</code></pre>
-<pre><code>## bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># A simple function that prints some outputs</span>
+<span class="va">FUN</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">{</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> 
+<span class="op">}</span>
+
+<span class="co"># input for 25 array jobs</span>
+<span class="va">PARAMS</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span>, 
+  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span>
+  <span class="op">)</span>
+
+<span class="co"># generates the input files, adding some module dependencies</span>
+<span class="fu"><a href="../reference/run_lsf.html">run_lsf</a></span><span class="op">(</span><span class="va">FUN</span>, 
+        <span class="va">PARAMS</span>, 
+        BSUB_config <span class="op">=</span> <span class="va">custom_BSUB</span>,
+        modules <span class="op">=</span> <span class="st">'R/3.5.0'</span>
+        <span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## ── easypar: LSF array jobs generator ───────────────────────────────────────────</span></code></pre>
+<pre><code><span class="co">## → Destination folder: <span style="color: #00BB00;">.</span></span></code></pre>
+<pre><code><span class="co">## Creating folder for output and error logs:  log</span></code></pre>
+<pre><code><span class="co">## <span style="color: #00BB00;">✓</span> LSF submission script: <span style="color: #00BB00;">#!/bin/bash</span></span>
+<span class="co"><span style="color: #00BB00;">## </span></span>
+<span class="co"><span style="color: #00BB00;">## #BSUB -J bwa_aligner[1-25]</span></span>
+<span class="co"><span style="color: #00BB00;">## #BSUB -P DKSMWOP331</span></span>
+<span class="co"><span style="color: #00BB00;">## #BSUB -q bioinformatics</span></span>
+<span class="co"><span style="color: #00BB00;">## #BSUB -n 1</span></span>
+<span class="co"><span style="color: #00BB00;">## #BSUB -R "span[hosts=1]"</span></span>
+<span class="co"><span style="color: #00BB00;">## #BSUB -W 4:00</span></span>
+<span class="co"><span style="color: #00BB00;">## #BSUB -o log/output.%J.%I</span></span>
+<span class="co"><span style="color: #00BB00;">## #BSUB -e log/errors.%J.%I</span></span>
+<span class="co"><span style="color: #00BB00;">## </span></span>
+<span class="co"><span style="color: #00BB00;">## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=</span></span>
+<span class="co"><span style="color: #00BB00;">## # Automatic LSF script generated via easypar</span></span>
+<span class="co"><span style="color: #00BB00;">## # 2022-05-08 19:20:22</span></span>
+<span class="co"><span style="color: #00BB00;">## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=</span></span>
+<span class="co"><span style="color: #00BB00;">## </span></span>
+<span class="co"><span style="color: #00BB00;">## # Required modules</span></span>
+<span class="co"><span style="color: #00BB00;">## module load R/3.5.0 </span></span>
+<span class="co"><span style="color: #00BB00;">## </span></span>
+<span class="co"><span style="color: #00BB00;">## </span></span>
+<span class="co"><span style="color: #00BB00;">## # Input file and R script</span></span>
+<span class="co"><span style="color: #00BB00;">## file_input=EASYPAR_LSF_input_jobarray.csv</span></span>
+<span class="co"><span style="color: #00BB00;">## R_script=EASYPAR_LSF_Run.R</span></span>
+<span class="co"><span style="color: #00BB00;">## line=$LSB_JOBINDEX</span></span>
+<span class="co"><span style="color: #00BB00;">## </span></span>
+<span class="co"><span style="color: #00BB00;">## # Data loading</span></span>
+<span class="co"><span style="color: #00BB00;">## x=$( awk -v line=$line 'BEGIN {FS="\t"}; FNR==line {print $1}' $file_input)</span></span>
+<span class="co"><span style="color: #00BB00;">## y=$( awk -v line=$line 'BEGIN {FS="\t"}; FNR==line {print $2}' $file_input)</span></span>
+<span class="co"><span style="color: #00BB00;">## </span></span>
+<span class="co"><span style="color: #00BB00;">## # Job run</span></span>
+<span class="co"><span style="color: #00BB00;">## Rscript $R_script $x $y</span> (R runner: <span style="color: #00BB00;">EASYPAR_LSF_Run.R</span>)</span></code></pre>
+<pre><code><span class="co">## <span style="color: #00BB00;">✓</span>  Input file (head of): <span style="color: #00BB00;">EASYPAR_LSF_input_jobarray.csv</span></span></code></pre>
+<pre><code><span class="co">## </span></code></pre>
+<pre><code><span class="co">## ── <span style="color: #BBBBBB; font-weight: bold;">Scripts generated</span> ──</span></code></pre>
+<pre><code><span class="co">## </span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## <span style="color: #BBBB00;">Job submission:</span> bsub &lt; EASYPAR_LSF_submission.sh</span>
+<span class="co">## <span style="color: #BBBB00;">   Job testing:</span> Rscript EASYPAR_LSF_Run.R 0.0442523094825447 0.0618716832250357</span></code></pre>
 </div>
-<div id="submitting-the-job" class="section level4">
-<h4 class="hasAnchor">
-<a href="#submitting-the-job" class="anchor"></a>Submitting the job</h4>
+<div class="section level4">
+<h4 id="submitting-the-job">Submitting the job<a class="anchor" aria-label="anchor" href="#submitting-the-job"></a>
+</h4>
 <p>If you do not try to run it automatically, command <code>bsub &lt; EASYPAR_LSF_submission.sh</code> will submit the jobs to the cluster.</p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-
-      </div>
-
+  </main>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Giulio Caravagna.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Giulio Caravagna.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
