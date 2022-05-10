@@ -30,7 +30,8 @@ Imports:
     tibble,
     crayon,
     readr,
-    markdown
+    markdown,
+    prettydoc
 RoxygenNote: 7.1.2
 Suggests: 
     covr,
