@@ -256,7 +256,7 @@ run_SLURM = function(FUN,
   )
   
   # Looping over per task
-  loop_start = "for (( run=$START_NUM; run<=END_NUM; run++ )); do \n"
+  loop_start = "for (( run=$START_NUM; run<=$END_NUM; run++ )); do \n"
   
   # Who am I? What task am I executing?
   loop_info = "\techo This is SLURM task $SLURM_ARRAY_TASK_ID, run number $run \n"
