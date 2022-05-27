@@ -81,7 +81,7 @@ The package comes with a default QSUB configuration, that **has to be updated ac
 library(easypar)
 
 # Default parameters in the package
-default_PBSpro_config()
+default_QSUB_config()
 ```
 
 These are classical QSUB parameters:
@@ -101,7 +101,7 @@ Modifications are done to the default list of parameters; other QSUB flags can b
 used as well. No checkings on their correctness are done by `easypar`.
 
 ```{r, eval=T}
-custom_QSUB = default_PBSpro_config()
+custom_QSUB = default_QSUB_config()
 
 # More informative job ID
 custom_QSUB$`-J` = "bwa_aligner"
@@ -115,7 +115,7 @@ custom_QSUB$`-q` = "bioinformatics"
 print(custom_QSUB)
 
 # Shorter version
-custom_QSUB = default_PBSpro_config(J = 'bwa_aligner', P = 'DKSMWOP331', q = 'bioinformatics')
+custom_QSUB = default_QSUB_config(J = 'bwa_aligner', project = 'DKSMWOP331', queue = 'bioinformatics')
 
 print(custom_QSUB)
 ```

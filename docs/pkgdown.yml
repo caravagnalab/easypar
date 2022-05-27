@@ -1,10 +1,11 @@
-pandoc: 2.17.1.1
-pkgdown: 2.0.3
+pandoc: 2.11.4
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   easypar: easypar.html
   lsf: lsf.html
-last_built: 2022-05-10T10:02Z
+  pbspro: pbspro.html
+last_built: 2022-05-27T14:34Z
 urls:
   reference: https://caravagnalab.github.io/easypar/reference
   article: https://caravagnalab.github.io/easypar/articles

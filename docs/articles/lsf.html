@@ -52,6 +52,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/lsf.html">LSF array jobs with easypar</a>
+    <a class="dropdown-item" href="../articles/pbspro.html">PBSpro array jobs with easypar</a>
   </div>
 </li>
 <li class="nav-item">
@@ -82,8 +83,7 @@
 <div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>LSF array jobs with easypar</h1>
-                        <h4 data-toc-skip class="author">Giulio
-Caravagna</h4>
+                        <h4 data-toc-skip class="author">Giulio Caravagna</h4>
             
             <h4 data-toc-skip class="date">15 September 2019</h4>
       
@@ -93,8 +93,7 @@ Caravagna</h4>
 
     
     
-<p><code>easypar</code> can be used to generate scripts that submit
-array jobs to the LSF cluster system.</p>
+<p><code>easypar</code> can be used to generate scripts that submit array jobs to the LSF cluster system.</p>
 <p>First, write in R your code.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Computation function </span>
@@ -116,55 +115,38 @@ bsub &lt; EASYPAR_LSF_submission.sh</code></pre>
 </h4>
 <!-- To use  `run_lsf` you need: -->
 <ul>
-<li>a function <code>FUN</code> (e.g.,: <code>FUN = ls</code>) that can
-run as a stand-alone R application, with its own parameters and that
-manages explicitly its dependencies.</li>
+<li>a function <code>FUN</code> (e.g.,: <code>FUN = ls</code>) that can run as a stand-alone R application, with its own parameters and that manages explicitly its dependencies.</li>
 </ul>
 <blockquote>
 <p>Note: <code>FUN</code> will be run as an indipendent process.</p>
 </blockquote>
 <ul>
-<li>a dataframe <code>PARAMS</code> where every row is an input for
-<code>FUN</code>. The column order must match <code>FUN</code>
-arguments.</li>
+<li>a dataframe <code>PARAMS</code> where every row is an input for <code>FUN</code>. The column order must match <code>FUN</code> arguments.</li>
 </ul>
-<p>Conceptually, you set up the data as for an
-<code>apply(FUN, MARGIN = 1)</code> by row.</p>
-<p>The input should have column names without dots or spaces; these will
-match the arguments of <code>FUN</code>. So, for instance, an input with
-2-columns will only work if <code>FUN</code> has 2 parameters.</p>
+<p>Conceptually, you set up the data as for an <code>apply(FUN, MARGIN = 1)</code> by row.</p>
+<p>The input should have column names without dots or spaces; these will match the arguments of <code>FUN</code>. So, for instance, an input with 2-columns will only work if <code>FUN</code> has 2 parameters.</p>
 </div>
 <div class="section level4">
 <h4 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
 </h4>
 <p><code>run_lsf</code> generates 3 files:</p>
 <ul>
-<li><p>an R script wrapping the definition of <code>FUN</code>, with
-extra code to call <code>FUN</code> using parameters from the command
-line. Your function in this script is called with a fake name;</p></li>
-<li><p>a <code>csv</code> file containing the input <code>PARAMS</code>,
-without any header (column names), and row names.</p></li>
-<li><p>a LSF array job submission script with <code>N</code> jobs where
-<code>N</code> are the rows of <code>PARAMS</code>.</p></li>
+<li><p>an R script wrapping the definition of <code>FUN</code>, with extra code to call <code>FUN</code> using parameters from the command line. Your function in this script is called with a fake name;</p></li>
+<li><p>a <code>csv</code> file containing the input <code>PARAMS</code>, without any header (column names), and row names.</p></li>
+<li><p>a LSF array job submission script with <code>N</code> jobs where <code>N</code> are the rows of <code>PARAMS</code>.</p></li>
 </ul>
-<p>Before submitting the job, test the computation as explained
-above.</p>
+<p>Before submitting the job, test the computation as explained above.</p>
 </div>
 <div class="section level4">
 <h4 id="customising-jobs">Customising jobs<a class="anchor" aria-label="anchor" href="#customising-jobs"></a>
 </h4>
-<p>Cluster-specific BSUB instructions can be specified, as well as other
-dependencies from modules available on the cluster.</p>
+<p>Cluster-specific BSUB instructions can be specified, as well as other dependencies from modules available on the cluster.</p>
 <p>Function <code>run_lsf</code> allows to:</p>
 <ul>
-<li><p>specify a list of modules that will be added as dependencies of
-the LSF submission script. For instance,
-<code>modules = 'R/3.5.0'</code> will generate the dependecy for a
-specific R version (<code>3.5.0</code>).</p></li>
+<li><p>specify a list of modules that will be added as dependencies of the LSF submission script. For instance, <code>modules = 'R/3.5.0'</code> will generate the dependecy for a specific R version (<code>3.5.0</code>).</p></li>
 <li><p>customize the BSUB parameters of the generated script.</p></li>
 </ul>
-<p>The package comes with a default BSUB configuration, that <strong>has
-to be updated according to your cluster setup</strong>.</p>
+<p>The package comes with a default BSUB configuration, that <strong>has to be updated according to your cluster setup</strong>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caravagnalab.github.io/easypar/">easypar</a></span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Warning: replacing previous import 'cli::num_ansi_colors' by</span>
@@ -208,19 +190,12 @@ to be updated according to your cluster setup</strong>.</p>
 <li>
 <code>-W</code> the wall time of the jobs;</li>
 <li>
-<code>-o</code> and <code>-e</code>, the outputs and the error
-filenames. Notice that by default we have the job array ID in the
-filename, so to have one log per job.</li>
+<code>-o</code> and <code>-e</code>, the outputs and the error filenames. Notice that by default we have the job array ID in the filename, so to have one log per job.</li>
 </ul>
 <blockquote>
-<p>It is required to modify the default values of <code>-P</code> and
-<code>-q</code>, the project and queue ID, according to your LSF
-configuration. Otherwise, the submission script will generate an error
-becaue the default values do not mean anything.</p>
+<p>It is required to modify the default values of <code>-P</code> and <code>-q</code>, the project and queue ID, according to your LSF configuration. Otherwise, the submission script will generate an error becaue the default values do not mean anything.</p>
 </blockquote>
-<p>Modifications are done to the default list of parameters; other BSUB
-flags can be used as well. No checkings on their correctness are done by
-<code>easypar</code>.</p>
+<p>Modifications are done to the default list of parameters; other BSUB flags can be used as well. No checkings on their correctness are done by <code>easypar</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">custom_BSUB</span> <span class="op">=</span> <span class="fu"><a href="../reference/default_BSUB_config.html">default_BSUB_config</a></span><span class="op">(</span><span class="op">)</span>
 
@@ -288,14 +263,9 @@ flags can be used as well. No checkings on their correctness are done by
 <p>Once the BSUB has been customized, you can either:</p>
 <ul>
 <li>generate the submission scripts, and submit your job manually</li>
-<li>generate the submission scripts and submit the jobs with a
-<code>system</code> call.</li>
+<li>generate the submission scripts and submit the jobs with a <code>system</code> call.</li>
 </ul>
-<p>By default (<code>run = FALSE</code>) the <code>run_lsf</code>
-function outputs the shell command that should be used to submit the
-jobs, but leaves the user to submit the job. This is because we
-experienced some command line issues calling modules with a system
-call.</p>
+<p>By default (<code>run = FALSE</code>) the <code>run_lsf</code> function outputs the shell command that should be used to submit the jobs, but leaves the user to submit the job. This is because we experienced some command line issues calling modules with a system call.</p>
 </div>
 <div class="section level4">
 <h4 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -322,7 +292,8 @@ call.</p>
 <pre><code><span class="co">## ── easypar: LSF array jobs generator ───────────────────────────────────────────</span></code></pre>
 <pre><code><span class="co">## → Destination folder: <span style="color: #00BB00;">.</span></span></code></pre>
 <pre><code><span class="co">## Creating folder for output and error logs:  log</span></code></pre>
-<pre><code><span class="co">## <span style="color: #00BB00;">✔</span> LSF submission script: <span style="color: #00BB00;">#!/bin/bash</span></span>
+<pre><code><span class="co">## Warning in dir.create(folder[1]): 'log' already exists</span></code></pre>
+<pre><code><span class="co">## <span style="color: #00BB00;">✓</span> LSF submission script: <span style="color: #00BB00;">#!/bin/bash</span></span>
 <span class="co"><span style="color: #00BB00;">## </span></span>
 <span class="co"><span style="color: #00BB00;">## #BSUB -J bwa_aligner[1-25]</span></span>
 <span class="co"><span style="color: #00BB00;">## #BSUB -P DKSMWOP331</span></span>
@@ -335,7 +306,7 @@ call.</p>
 <span class="co"><span style="color: #00BB00;">## </span></span>
 <span class="co"><span style="color: #00BB00;">## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=</span></span>
 <span class="co"><span style="color: #00BB00;">## # Automatic LSF script generated via easypar</span></span>
-<span class="co"><span style="color: #00BB00;">## # 2022-05-10 12:02:32</span></span>
+<span class="co"><span style="color: #00BB00;">## # 2022-05-27 16:35:14</span></span>
 <span class="co"><span style="color: #00BB00;">## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=</span></span>
 <span class="co"><span style="color: #00BB00;">## </span></span>
 <span class="co"><span style="color: #00BB00;">## # Required modules</span></span>
@@ -353,20 +324,18 @@ call.</p>
 <span class="co"><span style="color: #00BB00;">## </span></span>
 <span class="co"><span style="color: #00BB00;">## # Job run</span></span>
 <span class="co"><span style="color: #00BB00;">## Rscript $R_script $x $y</span> (R runner: <span style="color: #00BB00;">EASYPAR_LSF_Run.R</span>)</span></code></pre>
-<pre><code><span class="co">## <span style="color: #00BB00;">✔</span>  Input file (head of): <span style="color: #00BB00;">EASYPAR_LSF_input_jobarray.csv</span></span></code></pre>
+<pre><code><span class="co">## <span style="color: #00BB00;">✓</span>  Input file (head of): <span style="color: #00BB00;">EASYPAR_LSF_input_jobarray.csv</span></span></code></pre>
 <pre><code><span class="co">## </span></code></pre>
 <pre><code><span class="co">## ── <span style="color: #BBBBBB; font-weight: bold;">Scripts generated</span> ──</span></code></pre>
 <pre><code><span class="co">## </span></code></pre>
 <pre><code><span class="co">## </span>
 <span class="co">## <span style="color: #BBBB00;">Job submission:</span> bsub &lt; EASYPAR_LSF_submission.sh</span>
-<span class="co">## <span style="color: #BBBB00;">   Job testing:</span> Rscript EASYPAR_LSF_Run.R 0.917323939036578 0.796664943220094</span></code></pre>
+<span class="co">## <span style="color: #BBBB00;">   Job testing:</span> Rscript EASYPAR_LSF_Run.R 0.395691439509392 0.897406319156289</span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="submitting-the-job">Submitting the job<a class="anchor" aria-label="anchor" href="#submitting-the-job"></a>
 </h4>
-<p>If you do not try to run it automatically, command
-<code>bsub &lt; EASYPAR_LSF_submission.sh</code> will submit the jobs to
-the cluster.</p>
+<p>If you do not try to run it automatically, command <code>bsub &lt; EASYPAR_LSF_submission.sh</code> will submit the jobs to the cluster.</p>
 </div>
   </main>
 </div>
@@ -380,7 +349,7 @@ the cluster.</p>
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>

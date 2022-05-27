@@ -7,7 +7,7 @@
 run_PBSpro(
   FUN,
   PARAMS,
-  QSUB_config = default_PBSpro_config(),
+  QSUB_config = default_QSUB_config(),
   modules = c("R/4.1.0"),
   extra_commands = NULL,
   input_file = "EASYPAR_PBSpro_input_jobarray.csv",
@@ -27,7 +27,7 @@ a computation. This function should be runnable as a standalone R script.}
 An array job with as many rows as \code{PARAMS} is generated.}
 
 \item{QSUB_config}{A list of QSUB commands for the PBSpro cluster should
-be provided. The default input is obtained from a call to \code{default_PBSpro_config()}.
+be provided. The default input is obtained from a call to \code{default_QSUB_config()}.
 The queue and the project ID should always be provided as they are cluster-specific. 
 Otherwise, default values will prompt errors submitting the job.}
 
@@ -94,6 +94,6 @@ run_PBSpro(FUN, PARAMS)
 }
 }
 \seealso{
-See \code{default_PBSpro_config} that is used to generate
+See \code{default_QSUB_config} that is used to generate
 default parameters for PBSpro jobs.
 }
