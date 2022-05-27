@@ -1,0 +1,157 @@
+---
+title: "PBSpro array jobs with easypar"
+author: "Giulio Caravagna"
+date: "15 September 2019"
+institute: "Institute for Cancer Research"
+email: "giulio.caravagna@icr.ac.uk"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{PBSpro array jobs with easypar}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+`easypar`  can be used  to generate scripts that submit array jobs to the PBSpro cluster system. 
+
+First, write in R your code.
+```{r, eval=FALSE}
+# Computation function 
+FUN = function(x, y){  ... }
+
+# Input for 25 array jobs that match FUN arguments
+PARAMS = data.frame(x = runif(25), y = runif(25))
+
+# Generates submission files 
+run_PBSpro(FUN, PARAMS)
+```
+
+Then, in your terminal.
+```{
+# Test if the generated script runs with the first input 
+head -1 EASYPAR_PBSpro_input_jobarray.csv | Rscript EASYPAR_PBSpro_Run.R
+
+# Submit array jobs (after loading the cluster module)
+bsub < EASYPAR_PBSpro_submission.sh
+```
+
+
+#### Requirements
+
+<!-- To use  `run_PBSpro` you need: -->
+
+-   a function `FUN` (e.g.,: `FUN = ls`) that can run as a stand-alone R application, with its own parameters and that manages explicitly its dependencies. 
+
+> Note: `FUN` will be run as an indipendent process.
+
+- a dataframe `PARAMS` where every row is an input for `FUN`. The column order must match `FUN` arguments.
+
+Conceptually, you set up the data as for an `apply(FUN, MARGIN = 1)` by row. 
+
+The input should have column names without dots or spaces; these will match the arguments of `FUN`. So, for instance, an input with 2-columns will only work if `FUN` has 2 parameters.
+
+
+#### Output
+
+`run_PBSpro` generates 3 files:
+
+- an R script wrapping the definition of `FUN`, with extra code to call `FUN` using parameters from the command line. 
+Your function in this script is called with a fake name;
+
+- a `csv` file containing the input `PARAMS`, without any header (column names), and row names. 
+
+- a PBSpro array job submission script with `N` jobs where `N` are the rows of `PARAMS`.
+
+
+Before submitting the job, test the computation as explained above.
+
+
+#### Customising jobs
+
+Cluster-specific QSUB instructions can be specified, as well as other dependencies from modules available on the cluster. 
+
+Function `run_PBSpro` allows to:
+
+- specify a list of modules that will be added as dependencies of the PBSpro submission script. For instance, `modules = 'R/3.5.0'` will generate the dependecy for a specific R version (`3.5.0`).
+
+- customize the QSUB parameters of the generated script. 
+
+The package comes with a default QSUB configuration, that **has to be updated according to your cluster setup**.
+
+```{r, eval=T}
+library(easypar)
+
+# Default parameters in the package
+default_PBSpro_config()
+```
+
+These are classical QSUB parameters:
+`-P` = the project ID,
+`-q` = the queue ID,
+`-l walltime` = the wall time of the jobs,
+`-l nodes=:ppn=` = the number of nodes and cpus to allocate as resources,
+`-N` = the job ID,
+`-o` and `-e` = the output and error filenames. Notice that by default
+we have the job array ID in the filename, so to have one log per job.
+
+> It is required to modify the default values of `-P` and `-q`, the project and queue ID,
+according to your PBSpro configuration. Otherwise, the submission script will 
+generate an error becaue the default values do not mean anything.
+
+Modifications are done to the default list of parameters; other QSUB flags can be
+used as well. No checkings on their correctness are done by `easypar`.
+
+```{r, eval=T}
+custom_QSUB = default_PBSpro_config()
+
+# More informative job ID
+custom_QSUB$`-J` = "bwa_aligner"
+
+# A token for a project allowed to run on the cluster
+custom_QSUB$`-P` = "DKSMWOP331"
+
+# A queue name that is valid on the cluster
+custom_QSUB$`-q` = "bioinformatics"
+
+print(custom_QSUB)
+
+# Shorter version
+custom_QSUB = default_PBSpro_config(J = 'bwa_aligner', P = 'DKSMWOP331', q = 'bioinformatics')
+
+print(custom_QSUB)
+```
+
+Once the QSUB has been customized, you can either:
+
+- generate the submission scripts, and submit your job manually
+- generate the submission scripts and submit the jobs with a `system` call. 
+
+By default (`run = FALSE`) the `run_PBSpro` function outputs the shell command that should be used to submit the jobs, but leaves the user to submit the job. This is because we experienced some command line issues calling
+modules with a system call.
+
+#### Example
+
+An example computation follows.
+
+```{r, eval=T}
+# A simple function that prints some outputs
+FUN = function(x, y){ 
+  print(x, y) 
+}
+
+# input for 25 array jobs
+PARAMS = data.frame(
+  x = runif(25), 
+  y = runif(25)
+  )
+
+# generates the input files, adding some module dependencies
+run_PBSpro(FUN, 
+        PARAMS, 
+        QSUB_config = custom_QSUB,
+        modules = 'R/3.5.0'
+        )
+```
+
+#### Submitting the job
+
+If you do not try to run it automatically, command `bsub < EASYPAR_PBSpro_submission.sh` will submit the jobs to the cluster.
