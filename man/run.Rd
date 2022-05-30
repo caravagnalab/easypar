@@ -41,9 +41,6 @@ run(
 
 \item{filter_errors}{If `TRUE`, errors intercepted are filtered before returning results.}
 }
-\value{
-
-}
 \description{
 Run a task on a list of inputs, making easy to parallelize it or run it in
 a sequential session. If the glonal option \code{easypar.parallel} is set, the parameter

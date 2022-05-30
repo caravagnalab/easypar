@@ -12,9 +12,9 @@
 #' @export
 #'
 #' @examples
-#' custom_QSUB = default_QSUB_config(time = '12:00')
-#' custom_QSUB$`-nodes` = 10
-#' custom_QSUB$`--partition` = "my_queue"
+#' custom_QSUB = default_QSUB_config(walltime = '12:00:00')
+#' custom_QSUB$`-l nodes=:ppn=` = c(1,8)
+#' custom_QSUB$`-q` = "my_queue"
 
 default_QSUB_config = function(
   project = 'EASYPAR_Project',

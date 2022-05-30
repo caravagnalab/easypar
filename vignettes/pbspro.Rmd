@@ -31,7 +31,7 @@ Then, in your terminal.
 head -1 EASYPAR_PBSpro_input_jobarray.csv | Rscript EASYPAR_PBSpro_Run.R
 
 # Submit array jobs (after loading the cluster module)
-bsub < EASYPAR_PBSpro_submission.sh
+qsub < EASYPAR_PBSpro_submission.sh
 ```
 
 
@@ -154,4 +154,4 @@ run_PBSpro(FUN,
 
 #### Submitting the job
 
-If you do not try to run it automatically, command `bsub < EASYPAR_PBSpro_submission.sh` will submit the jobs to the cluster.
+If you do not try to run it automatically, command `qsub < EASYPAR_PBSpro_submission.sh` will submit the jobs to the cluster.
