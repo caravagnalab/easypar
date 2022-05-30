@@ -94,7 +94,7 @@ filenames for the generated scripts.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">run_PBSpro</span><span class="op">(</span>
   <span class="va">FUN</span>,
   <span class="va">PARAMS</span>,
-  QSUB_config <span class="op">=</span> <span class="fu"><a href="default_PBSpro_config.html">default_QSUB_config</a></span><span class="op">(</span><span class="op">)</span>,
+  QSUB_config <span class="op">=</span> <span class="fu"><a href="default_QSUB_config.html">default_QSUB_config</a></span><span class="op">(</span><span class="op">)</span>,
   modules <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R/4.1.0"</span><span class="op">)</span>,
   extra_commands <span class="op">=</span> <span class="cn">NULL</span>,
   input_file <span class="op">=</span> <span class="st">"EASYPAR_PBSpro_input_jobarray.csv"</span>,
@@ -117,7 +117,7 @@ a computation. This function should be runnable as a standalone R script.</p></d
 An array job with as many rows as <code>PARAMS</code> is generated.</p></dd>
 <dt>QSUB_config</dt>
 <dd><p>A list of QSUB commands for the PBSpro cluster should
-be provided. The default input is obtained from a call to <code><a href="default_PBSpro_config.html">default_QSUB_config()</a></code>.
+be provided. The default input is obtained from a call to <code><a href="default_QSUB_config.html">default_QSUB_config()</a></code>.
 The queue and the project ID should always be provided as they are cluster-specific. 
 Otherwise, default values will prompt errors submitting the job.</p></dd>
 <dt>modules</dt>

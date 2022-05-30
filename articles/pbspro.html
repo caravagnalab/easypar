@@ -108,7 +108,7 @@
 head -1 EASYPAR_PBSpro_input_jobarray.csv | Rscript EASYPAR_PBSpro_Run.R
 
 # Submit array jobs (after loading the cluster module)
-bsub &lt; EASYPAR_PBSpro_submission.sh</code></pre>
+qsub &lt; EASYPAR_PBSpro_submission.sh</code></pre>
 <div class="section level4">
 <h4 id="requirements">Requirements<a class="anchor" aria-label="anchor" href="#requirements"></a>
 </h4>
@@ -152,7 +152,7 @@ bsub &lt; EASYPAR_PBSpro_submission.sh</code></pre>
 <span class="co">## 'crayon::num_ansi_colors' when loading 'easypar'</span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Default parameters in the package</span>
-<span class="fu"><a href="../reference/default_PBSpro_config.html">default_QSUB_config</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/default_QSUB_config.html">default_QSUB_config</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## $`-P`</span>
 <span class="co">## [1] "EASYPAR_Project"</span>
 <span class="co">## </span>
@@ -182,7 +182,7 @@ bsub &lt; EASYPAR_PBSpro_submission.sh</code></pre>
 </blockquote>
 <p>Modifications are done to the default list of parameters; other QSUB flags can be used as well. No checkings on their correctness are done by <code>easypar</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">custom_QSUB</span> <span class="op">=</span> <span class="fu"><a href="../reference/default_PBSpro_config.html">default_QSUB_config</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">custom_QSUB</span> <span class="op">=</span> <span class="fu"><a href="../reference/default_QSUB_config.html">default_QSUB_config</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># More informative job ID</span>
 <span class="va">custom_QSUB</span><span class="op">$</span><span class="va">`-J`</span> <span class="op">=</span> <span class="st">"bwa_aligner"</span>
@@ -219,7 +219,7 @@ bsub &lt; EASYPAR_PBSpro_submission.sh</code></pre>
 <span class="co">## [1] "bwa_aligner"</span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Shorter version</span>
-<span class="va">custom_QSUB</span> <span class="op">=</span> <span class="fu"><a href="../reference/default_PBSpro_config.html">default_QSUB_config</a></span><span class="op">(</span>J <span class="op">=</span> <span class="st">'bwa_aligner'</span>, project <span class="op">=</span> <span class="st">'DKSMWOP331'</span>, queue <span class="op">=</span> <span class="st">'bioinformatics'</span><span class="op">)</span>
+<span class="va">custom_QSUB</span> <span class="op">=</span> <span class="fu"><a href="../reference/default_QSUB_config.html">default_QSUB_config</a></span><span class="op">(</span>J <span class="op">=</span> <span class="st">'bwa_aligner'</span>, project <span class="op">=</span> <span class="st">'DKSMWOP331'</span>, queue <span class="op">=</span> <span class="st">'bioinformatics'</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">custom_QSUB</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## $`-P`</span>
@@ -289,7 +289,7 @@ bsub &lt; EASYPAR_PBSpro_submission.sh</code></pre>
 <span class="co"><span style="color: #00BB00;">## </span></span>
 <span class="co"><span style="color: #00BB00;">## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=</span></span>
 <span class="co"><span style="color: #00BB00;">## # Automatic PBSpro script generated via easypar</span></span>
-<span class="co"><span style="color: #00BB00;">## # 2022-05-30 11:03:22</span></span>
+<span class="co"><span style="color: #00BB00;">## # 2022-05-30 13:23:22</span></span>
 <span class="co"><span style="color: #00BB00;">## # =-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=</span></span>
 <span class="co"><span style="color: #00BB00;">## </span></span>
 <span class="co"><span style="color: #00BB00;">## # Required modules</span></span>
@@ -324,12 +324,12 @@ bsub &lt; EASYPAR_PBSpro_submission.sh</code></pre>
 <pre><code><span class="co">## </span></code></pre>
 <pre><code><span class="co">## </span>
 <span class="co">## <span style="color: #BBBB00;">Job submission:</span> qsub -c c &lt; EASYPAR_PBSpro_submission.sh</span>
-<span class="co">## <span style="color: #BBBB00;">   Job testing:</span> Rscript EASYPAR_PBSpro_Run.R 0.930501024937257 0.724598066182807</span></code></pre>
+<span class="co">## <span style="color: #BBBB00;">   Job testing:</span> Rscript EASYPAR_PBSpro_Run.R 0.191178356297314 0.541302693774924</span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="submitting-the-job">Submitting the job<a class="anchor" aria-label="anchor" href="#submitting-the-job"></a>
 </h4>
-<p>If you do not try to run it automatically, command <code>bsub &lt; EASYPAR_PBSpro_submission.sh</code> will submit the jobs to the cluster.</p>
+<p>If you do not try to run it automatically, command <code>qsub &lt; EASYPAR_PBSpro_submission.sh</code> will submit the jobs to the cluster.</p>
 </div>
   </main>
 </div>
