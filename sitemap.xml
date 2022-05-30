@@ -19,6 +19,9 @@
     <loc>https://caravagnalab.github.io/easypar/articles/lsf.html</loc>
   </url>
   <url>
+    <loc>https://caravagnalab.github.io/easypar/articles/pbspro.html</loc>
+  </url>
+  <url>
     <loc>https://caravagnalab.github.io/easypar/authors.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>https://caravagnalab.github.io/easypar/reference/default_BSUB_config.html</loc>
+  </url>
+  <url>
+    <loc>https://caravagnalab.github.io/easypar/reference/default_PBSpro_config.html</loc>
   </url>
   <url>
     <loc>https://caravagnalab.github.io/easypar/reference/default_SBATCH_config.html</loc>
@@ -47,6 +53,9 @@
   </url>
   <url>
     <loc>https://caravagnalab.github.io/easypar/reference/run.html</loc>
+  </url>
+  <url>
+    <loc>https://caravagnalab.github.io/easypar/reference/run_PBSpro.html</loc>
   </url>
   <url>
     <loc>https://caravagnalab.github.io/easypar/reference/run_SLURM.html</loc>
