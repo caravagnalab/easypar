@@ -1,9 +1,9 @@
-#' Deafult QSUB setting to submit array jobs to SLURM clusters.
+#' Deafult QSUB setting to submit array jobs to PBSpro clusters.
 #'
 #' @description Deafult QSUB setting to submit array jobs to
 #' PBSpro clusters. This is handy to obtain a default input, and
 #' implement custom modificiations. These parameters are to be
-#' used by function \code{run_slurm}.
+#' used by function \code{run_PBSpro}.
 #'
 #' @seealso run_lsf
 #'

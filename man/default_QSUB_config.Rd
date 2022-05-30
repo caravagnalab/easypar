@@ -2,7 +2,7 @@
 % Please edit documentation in R/default_QSUB_config.R
 \name{default_QSUB_config}
 \alias{default_QSUB_config}
-\title{Deafult QSUB setting to submit array jobs to SLURM clusters.}
+\title{Deafult QSUB setting to submit array jobs to PBSpro clusters.}
 \usage{
 default_QSUB_config(
   project = "EASYPAR_Project",
@@ -22,7 +22,7 @@ A named list of QSUB settings.
 Deafult QSUB setting to submit array jobs to
 PBSpro clusters. This is handy to obtain a default input, and
 implement custom modificiations. These parameters are to be
-used by function \code{run_slurm}.
+used by function \code{run_PBSpro}.
 }
 \examples{
 custom_QSUB = default_QSUB_config(walltime = '12:00:00')
